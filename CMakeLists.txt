@@ -3,4 +3,9 @@ project(Yukon C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(Yukon main.c)
+add_executable(Yukon main.c
+        deck.c
+        deck.c
+        deck.h
+        deck.h
+)
