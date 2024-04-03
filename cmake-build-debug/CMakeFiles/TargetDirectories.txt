@@ -1,0 +1,3 @@
+C:/DTU/2.Semester/02322MaskinaerProgrammering/Lab/project2_machine/Yukon/cmake-build-debug/CMakeFiles/Yukon.dir
+C:/DTU/2.Semester/02322MaskinaerProgrammering/Lab/project2_machine/Yukon/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/DTU/2.Semester/02322MaskinaerProgrammering/Lab/project2_machine/Yukon/cmake-build-debug/CMakeFiles/rebuild_cache.dir
