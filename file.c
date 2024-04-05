@@ -1,6 +1,7 @@
 //
 // Created by david on 04-Apr-24.
 //
+#include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include "file.h"

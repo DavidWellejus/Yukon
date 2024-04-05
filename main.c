@@ -22,6 +22,9 @@ int main() {
         fprintf(stderr, "Failed to allocate memory for deck or tableau.\n");
         exit(EXIT_FAILURE);
     }
+    initializeDeck(deck);
+    //shuffleDeck(deck);
+    saveDeckToFile(deck, "C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/ShuffledDeck.txt");
 
     printStartupScreen();
 
@@ -31,6 +34,7 @@ int main() {
     while (true) {
         scanf("%255s", command);
 
+        //LD C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/ShuffledDeck.txt
         if (strcmp(command, "LD") == 0) {
             if (scanf("%255s", filename) == 1) {
                 // Hvis et filnavn er angivet
@@ -43,8 +47,6 @@ int main() {
             }
             else {
                 // Hvis ingen filnavn er angivet, initialiserer et nyt ublandet dæk
-                initializeDeck(deck);
-                shuffleDeck(deck);  // Bland dækket før det deles ud
                 dealToTableau(deck, tableau);
                 printTableau(tableau);
             }
