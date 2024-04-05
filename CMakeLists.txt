@@ -8,4 +8,7 @@ add_executable(Yukon main.c
         deck.c
         deck.h
         deck.h
+        file.h
+        file.c
+        file.c
 )
