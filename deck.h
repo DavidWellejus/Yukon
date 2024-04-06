@@ -39,5 +39,6 @@ void dealToTableau(Deck *deck, Tableau *tableau);
 void printTableau(Tableau *tableau);
 bool isValidCard(const char *cardStr);
 bool addCard(Deck *deck, const char value, const char suit);
+void setShowAllCards(Tableau *tableau, bool isVisible);
 
 #endif //YUKONPROJEKT_DECK_H

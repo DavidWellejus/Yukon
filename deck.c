@@ -12,8 +12,8 @@
 void initializeDeck(Deck *deck){
     deck->top = NULL;
     deck->size = 0;
-    char suits[] = {'S', 'H', 'D', 'C'};
-    char values[] = {'K', 'Q', 'J', 'T', '9', '8', '7', '6', '5', '4', '3', '2', 'A'};
+    char suits[] = {'C', 'D', 'H', 'S'};
+    char values[] = {'A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K'};
 
     for(int i = 0; i < 4; i++){
         for(int j = 0; j < 13; j++){
@@ -24,7 +24,7 @@ void initializeDeck(Deck *deck){
             }
             newNode->card.suit = suits[i];
             newNode->card.value = values[j];
-            newNode->card.isVisible = true; // Opdater til det nye feltnavn
+            newNode->card.isVisible = false; // Opdater til det nye feltnavn
             newNode->next = deck->top;
             deck->top = newNode;
             deck->size++;
@@ -114,7 +114,7 @@ bool addCard(Deck *deck, const char value, const char suit) {
 
     newCard->card.value = value;
     newCard->card.suit = suit;
-    newCard->card.isVisible = true; // Antag at alle nye kort er synlige når de tilføjes
+    newCard->card.isVisible = false; // Antag at alle nye kort er synlige når de tilføjes
     newCard->next = NULL;
 
     if (deck->top == NULL) {
@@ -143,6 +143,7 @@ Tableau* initializeTableau() {
 
     return tableau;
 }
+
 void dealToTableau(Deck *deck, Tableau *tableau) {
     CardNode *current = deck->top;
 
@@ -171,11 +172,6 @@ void dealToTableau(Deck *deck, Tableau *tableau) {
             lastCard->next = cardToAdd;
         }
 
-        // Sætter det øverste kort til at være synligt, hvis det er den første uddeling i kolonnen.
-        if (tableau->columns[colIndex]->size == 0) {
-            cardToAdd->card.isVisible = true;
-        }
-
         // Opdaterer størrelsen på kolonnen.
         tableau->columns[colIndex]->size++;
 
@@ -186,10 +182,6 @@ void dealToTableau(Deck *deck, Tableau *tableau) {
     // Sørger for at deck pegepinden 'top' opdateres til at pege på NULL, da alle kort er blevet delt.
     deck->top = NULL;
 }
-
-
-
-
 
 void printTableau(Tableau *tableau) {
     printf("C1\tC2\tC3\tC4\tC5\tC6\tC7\n\n");
@@ -229,3 +221,12 @@ void printTableau(Tableau *tableau) {
     printf("\nLAST Command: \nMessage: \nINPUT > ");
 }
 
+void setShowAllCards(Tableau *tableau, bool isVisible) {
+    for (int i = 0; i < 7; i++) { // Antager der er 7 kolonner i Tableau
+        CardNode *current = tableau->columns[i]->top;
+        while (current != NULL) {
+            current->card.isVisible = isVisible;
+            current = current->next;
+        }
+    }
+}
