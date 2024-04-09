@@ -11,24 +11,32 @@ void initializeDeck(Deck *deck);
 bool saveDeckToFile(const Deck *deck, const char *filename);
 void shuffleDeck(Deck* deck);
 Deck* loadDeckFromFile(const char *filename);
-void dealToTableau(Deck *deck, Tableau *tableau); // Antager at denne funktion eksisterer
-void printTableau(Tableau *tableau); // Antager at denne funktion eksisterer
-void setShowAllCards(Tableau *tableau, bool isVisible);
+void dealToStartTable(Deck *deck, Table *table);
+void printTable(Table *table);
+void setShowAllCards(Table *table, bool isVisible);
+Deck* splitter(Deck* deck, int split);
+void printDeck(Deck* deck);
+void freeTable(Table *table);
 
 int main() {
     Deck *deck = malloc(sizeof(Deck));
-    Tableau *tableau = initializeTableau(); // Tilføjet oprettelse af tableau
-    if (deck == NULL || tableau == NULL) {
+    Table *table = initializeTable();
+    if (deck == NULL || table == NULL) {
         fprintf(stderr, "Failed to allocate memory for deck or tableau.\n");
         exit(EXIT_FAILURE);
     }
-    //initializeDeck(deck); // Dette skal sandsynligvis kun gøres, hvis et nyt dæk skal oprettes
-    //saveDeckToFile(deck, "C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/ShuffledDeck.txt");
+
+    /*deck = loadDeckFromFile("C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/Deck.txt");
+    splitter(deck, 22);
+    dealToStartTable(deck, table);
+    setShowAllCards(table, true);
+    printTable(table);*/
     printStartupScreen();
 
     char inputLine[256];
     char command[256];
     char fileName[256];
+
 
     while (true) {
         printf("INPUT > ");
@@ -43,27 +51,52 @@ int main() {
 
             if (strcmp(command, "LD") == 0) {
                 if (sscanf(inputLine, "%*s %s", fileName) == 1) {
-                    // Hvis et filnavn er angivet
+
                     if (!loadDeckFromFile(fileName)) {
                         printf("Error: Invalid file or unable to load deck.\n");
                     } else {
-                        deck = loadDeckFromFile(fileName); // Opdaterer deck med det indlæste dæk
-                        shuffleDeck(deck);
-                        dealToTableau(deck, tableau); // Del kortene ud til tableau
-                        printTableau(tableau); // Viser de 7 bunker af kort i overensstemmelse med startScreen formatet
+                        deck = loadDeckFromFile(fileName);
+                        dealToStartTable(deck, table);
+                        printTable(table);
                     }
-                } else {
+                }
+                else {
                     deck = loadDeckFromFile("C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/Deck.txt");
-                    dealToTableau(deck, tableau);
-                    printTableau(tableau);
+                    dealToStartTable(deck, table);
+                    printTable(table);
                 }
             }
             else if (strcmp(command, "SW") == 0) {
-                setShowAllCards(tableau, true); // Sætter alle kort til synlige
-                printTableau(tableau); // Printer Tableau med synlige kort
+                setShowAllCards(table, true);
+                printTable(table);
             }
+
+            else if (strcmp(command, "SI") == 0){
+                int split;
+                if (sscanf(inputLine, "%*s %d", &split) != 1 || split <= 0 || split >= deck->size) {
+                    split = rand() % (deck->size - 1) + 1;
+                    printf("Using random split: %d\n", split);
+
+                }
+
+                Deck* newDeck = splitter(deck, split);
+                freeDeck(deck);
+                deck = newDeck;
+                
+                dealToStartTable(deck, table);
+                printTable(table);
+            }
+
+            else if(strcmp(command, "SR") == 0){
+                shuffleDeck(deck);
+
+                dealToStartTable(deck, table);
+                printTable(table);
+            }
+
+
             else if (strcmp(command, "QQ") == 0) {
-                // Afslutter programmet
+
                 break;
             } else {
                 printf("Unknown command.\n");
@@ -71,17 +104,10 @@ int main() {
         } else {
             printf("Error: No command entered.\n");
         }
-
-        // Ryd input buffer for at undgå at gamle input påvirker de næste læsninger
-        int c;
-        while ((c = getchar()) != '\n' && c != EOF) {}
     }
 
-    // Frigiver hukommelsen for dækket og tableauet her
-    // Her skal du have en funktion, der korrekt frigiver hele dækket og tableauet,
-    // herunder alle CardNodes oprettet dynamisk.
     free(deck);
-    free(tableau);
+    free(table);
 
     return 0;
 }

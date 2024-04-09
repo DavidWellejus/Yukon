@@ -7,38 +7,45 @@
 #ifndef YUKONPROJEKT_DECK_H
 #define YUKONPROJEKT_DECK_H
 
-// Kortstruktur, som indeholder information om værdi, kulør og synlighed.
+
 typedef struct Card {
     char value;    // 'A', '2'-'9', 'T', 'J', 'Q', 'K'
     char suit;     // 'C', 'D', 'H', 'S'
     bool isVisible;
 } Card;
 
-// En node i en linked liste, som holder på et kort.
-typedef struct CardNode {
-    Card card;
-    struct CardNode* next;
-} CardNode;
 
-// En struktur som repræsenterer enten et fuldt dæk eller en kolonne i tableauet.
+typedef struct Node {
+    Card card;
+    struct Node* next;
+} Node;
+
+typedef struct Column {
+    int numberOfCards;
+
+}Column;
+
 typedef struct Deck {
-    CardNode *top;   // Peger på det øverste kort i dækket/kolonnen.
-    int size;        // Antal kort i dækket/kolonnen.
+    Node *top;
+    int size;
 } Deck;
 
-typedef struct Tableau {
-    Deck *columns[7]; // Array af pointers til Decks, som repræsenterer kolonner i tableauet.
-} Tableau;
 
-// Funktioner til at arbejde med dæk og kort.
+typedef struct Table {
+    Deck *columns[11];
+} Table;
+
+
 void initializeDeck(Deck *deck);
 void freeDeck(Deck *deck);
+void freeTable(Table *table);
 void shuffleDeck(Deck* deck);
-Tableau* initializeTableau();
-void dealToTableau(Deck *deck, Tableau *tableau);
-void printTableau(Tableau *tableau);
+Table* initializeTable();
+void dealToStartTable(Deck *deck, Table *table);
+void printTable(Table *table);
 bool isValidCard(const char *cardStr);
 bool addCard(Deck *deck, const char value, const char suit);
-void setShowAllCards(Tableau *tableau, bool isVisible);
-
+void setShowAllCards(Table *table, bool isVisible);
+Deck* splitter(Deck* deck, int split);
+void printDeck(Deck* deck);
 #endif //YUKONPROJEKT_DECK_H

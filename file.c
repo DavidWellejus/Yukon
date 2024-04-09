@@ -14,7 +14,7 @@ bool saveDeckToFile(const Deck *deck, const char *filename) {
         return false;
     }
 
-    CardNode *current = deck->top;
+    Node *current = deck->top;
     while (current != NULL) {
         fprintf(file, "%c%c\n", current->card.value, current->card.suit);
         current = current->next;
@@ -39,12 +39,12 @@ Deck* loadDeckFromFile(const char *filename) {
     deck->top = NULL;
     deck->size = 0;
 
-    char cardStr[4]; // 2 characters for the card and 1 for the null-terminator
+    char cardStr[4];
     int line = 0;
 
     while (fgets(cardStr, sizeof(cardStr), file) && line < 52) {
         if (cardStr[strlen(cardStr) - 1] == '\n') {
-            cardStr[strlen(cardStr) - 1] = '\0'; // Remove newline character
+            cardStr[strlen(cardStr) - 1] = '\0';
         }
 
         if (!isValidCard(cardStr)) {
@@ -57,7 +57,7 @@ Deck* loadDeckFromFile(const char *filename) {
         if (!addCard(deck, cardStr[0], cardStr[1])) {
             free(deck);
             fclose(file);
-            return NULL; // Afslut hvis der opstår en fejl ved tilføjelse af kort
+            return NULL;
         }
 
         line++;
@@ -71,5 +71,5 @@ Deck* loadDeckFromFile(const char *filename) {
     }
 
     fclose(file);
-    return deck; // Returner det fyldte dæk
+    return deck;
 }
