@@ -14,8 +14,8 @@ bool saveDeckToFile(const Deck *deck, const char *filename) {
         return false;
     }
 
-    Node *current = deck->top;
-    while (current != NULL) {
+    Node *current = deck->top->next; // Starter med det første faktiske kort
+    while (current != NULL && !current->isDummy) { // Tjekker for dummy-node
         fprintf(file, "%c%c\n", current->card.value, current->card.suit);
         current = current->next;
     }
@@ -36,40 +36,34 @@ Deck* loadDeckFromFile(const char *filename) {
         fclose(file);
         return NULL;
     }
-    deck->top = NULL;
-    deck->size = 0;
 
-    char cardStr[4];
-    int line = 0;
+    // Initialiser deck med en dummy-node
+    initializeDeck(deck);
 
-    while (fgets(cardStr, sizeof(cardStr), file) && line < 52) {
-        if (cardStr[strlen(cardStr) - 1] == '\n') {
-            cardStr[strlen(cardStr) - 1] = '\0';
+    char cardStr[4]; // For at rumme 2 tegn + null terminator
+    while (fgets(cardStr, sizeof(cardStr), file)) {
+        // Fjern newline tegnet, hvis det findes
+        cardStr[strcspn(cardStr, "\n")] = 0;
+
+        if (strlen(cardStr) == 2 && isValidCard(cardStr)) {
+            // Tilføjer kortet efter dummy-noden
+            if (!addCard(deck, cardStr[0], cardStr[1])) {
+                // Hvis tilføjelse af kort mislykkes, frigiv ressourcer og afslut
+                freeDeck(deck);
+                fclose(file);
+                return NULL;
+            }
         }
-
-        if (!isValidCard(cardStr)) {
-            fprintf(stderr, "Error: Invalid card at line %d.\n", line + 1);
-            free(deck);
+        else {
+            // Ugyldigt kort fundet
+            fprintf(stderr, "Error: Invalid card format in file.\n");
+            freeDeck(deck);
             fclose(file);
             return NULL;
         }
-
-        if (!addCard(deck, cardStr[0], cardStr[1])) {
-            free(deck);
-            fclose(file);
-            return NULL;
-        }
-
-        line++;
-    }
-
-    if (line != 52) {
-        fprintf(stderr, "Error: Incorrect number of cards. Expected 52, got %d.\n", line);
-        free(deck);
-        fclose(file);
-        return NULL;
     }
 
     fclose(file);
     return deck;
 }
+

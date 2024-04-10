@@ -10,27 +10,23 @@
 
 
 void initializeDeck(Deck *deck){
-    deck->top = NULL;
-    deck->size = 0;
-    char suits[] = {'C', 'D', 'H', 'S'};
-    char values[] = {'A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K'};
-
-    for(int i = 0; i < 4; i++){
-        for(int j = 0; j < 13; j++){
-            Node *newNode = malloc(sizeof(Node));
-            if(newNode == NULL){
-                fprintf(stderr, "Unable to allocate memory for new CardNode\n");
-                exit(EXIT_FAILURE);
-            }
-            newNode->card.suit = suits[i];
-            newNode->card.value = values[j];
-            newNode->card.isVisible = false;
-            newNode->next = deck->top;
-            deck->top = newNode;
-            deck->size++;
-        }
+    Node *dummyNode = malloc(sizeof(Node));
+    if(dummyNode == NULL){
+        fprintf(stderr, "Unable to allocate memory for dummy Node\n");
+        exit(EXIT_FAILURE);
     }
+
+    dummyNode->card.suit = '\0';
+    dummyNode->card.value = '\0';
+    dummyNode->card.isVisible = false;
+    dummyNode->next = dummyNode;
+    dummyNode->prev = dummyNode;
+    dummyNode->isDummy = true;
+
+    deck->top = dummyNode;
+    deck->size = 0;
 }
+
 
 
 void shuffleDeck(Deck *deck) {
@@ -117,27 +113,26 @@ bool isValidCard(const char *cardStr) {
 
 
 bool addCard(Deck *deck, const char value, const char suit) {
-    Node *newCard = malloc(sizeof(Node));
-    if (newCard == NULL) {
-        fprintf(stderr, "Unable to allocate memory for new CardNode\n");
+    Node *newNode = malloc(sizeof(Node));
+    if (newNode == NULL) {
+        fprintf(stderr, "Unable to allocate memory for new Node\n");
         return false;
     }
 
-    newCard->card.value = value;
-    newCard->card.suit = suit;
-    newCard->card.isVisible = false;
-    newCard->next = NULL;
+    newNode->card.value = value;
+    newNode->card.suit = suit;
+    newNode->card.isVisible = false;
+    newNode->isDummy = false;
 
-    if (deck->top == NULL) {
-        deck->top = newCard;
-    }
-    else {
-        newCard->next = deck->top;
-        deck->top = newCard;
-    }
+    newNode->next = deck->top->next;
+    newNode->prev = deck->top;
+    deck->top->next->prev = newNode;
+    deck->top->next = newNode;
+
     deck->size++;
     return true;
 }
+
 Table* initializeTable() {
     Table *table = malloc(sizeof(Table));
     if (table == NULL) {
@@ -145,71 +140,90 @@ Table* initializeTable() {
         exit(EXIT_FAILURE);
     }
 
-    for (int i = 0; i < 11; i++) {
+    for (int i = 0; i < 7; i++) {
+
         table->columns[i] = malloc(sizeof(Column));
-        table->columns[i]->top = NULL;
-        table->columns[i]->size = 0;
+        initializeDeck(table->columns[i]);
     }
     return table;
 }
 
 void dealToStartTable(Deck *deck, Table *table) {
-    Node *current = deck->top;
-    int colIndex = 0;
+    int cardCount = 0;
+    Node *current = deck->top->next;
 
-    while (current != NULL) {
-        Node *cardToAdd = current;
-        current = current->next;
-        cardToAdd->next = NULL;
+    while(cardCount < 52 && current != NULL && !current->isDummy){
+        for (int colIndex = 0; colIndex < 7; ++colIndex) {
+            if (current == NULL || current->isDummy) break;
 
-        if (table->columns[colIndex]->top == NULL) {
-            table->columns[colIndex]->top = cardToAdd;
-        }
-        else {
-            Node *lastCard = table->columns[colIndex]->top;
-            while (lastCard->next != NULL) {
-                lastCard = lastCard->next;
+            Node *columnDummy = table->columns[colIndex]->top;
+            Node *lastCardInColumn = columnDummy;
+
+            while (lastCardInColumn->next != NULL && !lastCardInColumn->next->isDummy) {
+                lastCardInColumn = lastCardInColumn->next;
+                //break;
             }
-            lastCard->next = cardToAdd;
+
+            current->prev = lastCardInColumn;
+            lastCardInColumn->next = current;
+
+            Node *nextCard = current->next;
+            current->next = lastCardInColumn;
+            current = nextCard;
+
+            table->columns[colIndex]->size++;
+            cardCount++;
         }
-        table->columns[colIndex]->size++;
-        colIndex = (colIndex + 1) % 7;
     }
-    deck->top = NULL;
+    if (current != NULL && !current->isDummy) {
+        fprintf(stderr, "Error: There are still cards left undistributed in the deck.\n");
+    }
 }
 
+
 void printTable(Table *table) {
-    printf("C1\tC2\tC3\tC4\tC5\tC6\tC7\n\n");
+    if (table == NULL) {
+        return;
+    }
+
+    printf("C1\tC2\tC3\tC4\tC5\tC6\tC7\tF1\tF2\tF3\tF4\n\n");
 
     int maxRows = 0;
-    for (int col = 0; col < 7; col++) {
-        int columnSize = table->columns[col]->size;
-        maxRows = (columnSize > maxRows) ? columnSize : maxRows;
+    for (int i = 0; i < 7; i++) {
+        int columnSize = table->columns[i]->size;
+        if (columnSize > maxRows) {
+            maxRows = columnSize;
+        }
     }
 
     for (int row = 0; row < maxRows; row++) {
         for (int col = 0; col < 7; col++) {
-            Node *currentNode = table->columns[col]->top;
-            for (int depth = 0; currentNode != NULL && depth < row; depth++) {
+            Node *currentNode = table->columns[col]->top->next;
+            for (int depth = 0; depth < row && currentNode != NULL; depth++) {
                 currentNode = currentNode->next;
             }
 
             if (currentNode != NULL) {
-                if (currentNode->card.isVisible) {
-                    printf("%c%c\t", currentNode->card.value, currentNode->card.suit);
-                }
-                else {
-                    printf("[ ]\t");
-                }
-            }
-            else {
+                printf("%c%c\t", currentNode->card.value, currentNode->card.suit);
+            } else {
                 printf("\t");
             }
         }
+
+        if (row == 0) {
+            for (int col = 7; col < 11; col++) {
+                Node *foundationNode = table->columns[col]->top->next;
+                if (foundationNode != NULL) {
+                    printf("[%c%c]\t", foundationNode->card.value, foundationNode->card.suit);
+                } else {
+                    printf("[ ]\t");
+                }
+            }
+        }
+
         printf("\n");
     }
-    printf("\n");
-    printf("\nLAST Command: \nMessage: \nINPUT > ");
+    printf("\nLAST Command: \nMessage: \n");
 }
 
 void setShowAllCards(Table *table, bool isVisible) {

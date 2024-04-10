@@ -17,7 +17,9 @@ typedef struct Card {
 
 typedef struct Node {
     Card card;
+    struct Node* prev;
     struct Node* next;
+    bool isDummy;
 } Node;
 
 typedef struct Column {
