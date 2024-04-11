@@ -48,60 +48,80 @@ Deck* splitter(Deck* originalDeck, int splitPoint) {
         return NULL;
     }
 
+    // Bestem splitpunktet
     if (splitPoint <= 0 || splitPoint >= originalDeck->size) {
         srand((unsigned int)time(NULL));
         splitPoint = rand() % (originalDeck->size - 1) + 1;
     }
 
-    Node* firstHalf = originalDeck->top;
+    Node* firstHalf = originalDeck->top->next; // Skip dummy node
     Node* secondHalf = firstHalf;
 
-    for (int i = 0; i < splitPoint - 1; i++) {
+    // Find splitpunktet
+    for (int i = 0; i < splitPoint; i++) {
         secondHalf = secondHalf->next;
     }
 
-    Node* temp = secondHalf;
-    secondHalf = secondHalf->next;
-    temp->next = NULL;
-
+    // Opretter et nyt dæk med en dummy node
     Deck* newDeck = malloc(sizeof(Deck));
     if (newDeck == NULL) {
         fprintf(stderr, "Unable to allocate memory for new Deck\n");
         exit(EXIT_FAILURE);
     }
-    newDeck->top = NULL;
+
+    Node *dummyNode = malloc(sizeof(Node));
+    if(dummyNode == NULL){
+        fprintf(stderr, "Unable to allocate memory for dummy Node\n");
+        exit(EXIT_FAILURE);
+    }
+    dummyNode->card.suit = '\0';
+    dummyNode->card.value = '\0';
+    dummyNode->card.isVisible = false;
+    dummyNode->next = dummyNode;
+    dummyNode->prev = dummyNode;
+    dummyNode->isDummy = true;
+    newDeck->top = dummyNode;
     newDeck->size = 0;
 
-    Node** current = &newDeck->top;
+    Node** current = &dummyNode->next;
 
-    while (firstHalf != NULL && secondHalf != NULL) {
-        if (firstHalf) {
+    // Kombinerer de to halvdele ved at flette dem sammen
+    while (firstHalf != originalDeck->top && secondHalf != originalDeck->top) {
+        if (firstHalf != originalDeck->top) {
             *current = firstHalf;
+            firstHalf->prev = dummyNode;
             firstHalf = firstHalf->next;
             current = &((*current)->next);
             newDeck->size++;
         }
-        if (secondHalf) {
+        if (secondHalf != originalDeck->top) {
             *current = secondHalf;
+            secondHalf->prev = *current;
             secondHalf = secondHalf->next;
             current = &((*current)->next);
             newDeck->size++;
         }
     }
 
-    while (firstHalf != NULL) {
+    // Tilføjer resten af kortene fra den halvdel, der ikke er tømt
+    while (firstHalf != originalDeck->top) {
         *current = firstHalf;
+        firstHalf->prev = *current;
         firstHalf = firstHalf->next;
         current = &((*current)->next);
         newDeck->size++;
     }
-    while (secondHalf != NULL) {
+    while (secondHalf != originalDeck->top) {
         *current = secondHalf;
+        secondHalf->prev = *current;
         secondHalf = secondHalf->next;
         current = &((*current)->next);
         newDeck->size++;
     }
 
-    *current = NULL;
+    // Luk cirklen ved at forbinde sidste kort til dummyNode
+    dummyNode->prev = *current;
+    (*current)->next = dummyNode;
+
     return newDeck;
 }

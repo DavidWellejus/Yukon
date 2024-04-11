@@ -32,37 +32,40 @@ Table* initializeTable() {
 
 void dealToStartTable(Deck *deck, Table *table) {
     int cardCount = 0;
-    Node* cardToDeal = deck->top->next;
+    Node *cardToDeal = deck->top->next; // Start with the first real card, skipping the dummy.
 
-    while (!cardToDeal->isDummy) {
+    while (cardToDeal != deck->top && cardCount < 52) { // We will deal 52 cards only.
         for (int colIndex = 0; colIndex < 7; ++colIndex) {
-            if (cardToDeal->isDummy) break;
+            if (cardToDeal == deck->top) break; // If we have looped back to the dummy node, break.
 
-            Node *columnDummy = table->columns[colIndex];
-            Node *lastCardInColumn = columnDummy;
-
-            while (!lastCardInColumn->next->isDummy) {
-                lastCardInColumn = lastCardInColumn->next;
+            // Create a new node that will be added to the column.
+            Node *newNode = malloc(sizeof(Node));
+            if (newNode == NULL) {
+                fprintf(stderr, "Failed to allocate memory for a new card node.\n");
+                exit(EXIT_FAILURE);
             }
+            *newNode = *cardToDeal; // Copy the card details.
+            newNode->next = newNode->prev = NULL; // This node will be standalone until linked.
 
-            cardToDeal->prev = lastCardInColumn;
-            lastCardInColumn->next = cardToDeal;
+            // Now link the new node into the column.
+            Node *columnDummy = table->columns[colIndex];
+            Node *lastCardInColumn = columnDummy->prev; // The last card is the one before the dummy node.
 
-            Node *nextCard = cardToDeal->next;
+            newNode->prev = lastCardInColumn;
+            newNode->next = columnDummy;
+            lastCardInColumn->next = newNode;
+            columnDummy->prev = newNode;
 
-            cardToDeal->next = columnDummy;
-            columnDummy->prev = cardToDeal;
-            cardToDeal = nextCard;
-
-            cardCount++;
-            if (cardToDeal->isDummy) break;
+            cardToDeal = cardToDeal->next; // Move to the next card to deal.
+            cardCount++; // Increase the dealt card count.
         }
     }
 
-    if (!cardToDeal->isDummy) {
-        fprintf(stderr, "Error: There are still cards left undistributed in the deck.\n");
+    if (cardCount < 52) {
+        fprintf(stderr, "Error: Not all cards have been distributed from the deck.\n");
     }
 }
+
 
 void printTable(Table *table) {
     if (table == NULL) {
@@ -102,7 +105,6 @@ void printTable(Table *table) {
             }
         }
 
-        // Only print the foundation nodes on the first row
         if (row == 0) {
             for (int col = 7; col < 11; col++) {
                 Node *foundationNode = table->columns[col]->next;
