@@ -5,6 +5,8 @@
 #include <string.h>
 #include "deck.h"
 #include "file.h"
+#include "shuffle.h"
+#include "table.h"
 
 void printStartupScreen();
 void initializeDeck(Deck *deck);
@@ -57,6 +59,7 @@ int main() {
                 }
                 else {
                     deck = loadDeckFromFile("C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/Deck.txt");
+                    saveDeckToFile(deck, "C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/Deck.txt");
                     dealToStartTable(deck, table);
                     printTable(table);
                 }

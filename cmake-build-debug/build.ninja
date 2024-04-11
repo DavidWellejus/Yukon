@@ -67,6 +67,18 @@ build CMakeFiles/Yukon.dir/file.c.obj: C_COMPILER__Yukon_unscanned_Debug C$:/DTU
   OBJECT_DIR = CMakeFiles\Yukon.dir
   OBJECT_FILE_DIR = CMakeFiles\Yukon.dir
 
+build CMakeFiles/Yukon.dir/shuffle.c.obj: C_COMPILER__Yukon_unscanned_Debug C$:/DTU/2.Semester/02322MaskinaerProgrammering/Lab/project2_machine/Yukon/shuffle.c || cmake_object_order_depends_target_Yukon
+  DEP_FILE = CMakeFiles\Yukon.dir\shuffle.c.obj.d
+  FLAGS = -g -std=gnu11 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\Yukon.dir
+  OBJECT_FILE_DIR = CMakeFiles\Yukon.dir
+
+build CMakeFiles/Yukon.dir/table.c.obj: C_COMPILER__Yukon_unscanned_Debug C$:/DTU/2.Semester/02322MaskinaerProgrammering/Lab/project2_machine/Yukon/table.c || cmake_object_order_depends_target_Yukon
+  DEP_FILE = CMakeFiles\Yukon.dir\table.c.obj.d
+  FLAGS = -g -std=gnu11 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\Yukon.dir
+  OBJECT_FILE_DIR = CMakeFiles\Yukon.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Yukon
@@ -75,7 +87,7 @@ build CMakeFiles/Yukon.dir/file.c.obj: C_COMPILER__Yukon_unscanned_Debug C$:/DTU
 #############################################
 # Link the executable Yukon.exe
 
-build Yukon.exe: C_EXECUTABLE_LINKER__Yukon_Debug CMakeFiles/Yukon.dir/main.c.obj CMakeFiles/Yukon.dir/deck.c.obj CMakeFiles/Yukon.dir/file.c.obj
+build Yukon.exe: C_EXECUTABLE_LINKER__Yukon_Debug CMakeFiles/Yukon.dir/main.c.obj CMakeFiles/Yukon.dir/deck.c.obj CMakeFiles/Yukon.dir/file.c.obj CMakeFiles/Yukon.dir/shuffle.c.obj CMakeFiles/Yukon.dir/table.c.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Yukon.dir

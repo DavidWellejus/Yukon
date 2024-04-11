@@ -16,16 +16,11 @@ typedef struct Card {
 
 
 typedef struct Node {
-    Card card;
+    Card card; //brug evt. en card pointer
     struct Node* prev;
     struct Node* next;
     bool isDummy;
 } Node;
-
-typedef struct Column {
-    int numberOfCards;
-
-}Column;
 
 typedef struct Deck {
     Node *top;
@@ -34,7 +29,7 @@ typedef struct Deck {
 
 
 typedef struct Table {
-    Deck *columns[11];
+    Node* columns[11];
 } Table;
 
 
