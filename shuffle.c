@@ -53,55 +53,78 @@ Deck* splitter(Deck* originalDeck, int splitPoint) {
         splitPoint = rand() % (originalDeck->size - 1) + 1;
     }
 
-    Node* firstHalf = originalDeck->top;
+    Node* firstHalf = originalDeck->top->next; // Skip dummy node
     Node* secondHalf = firstHalf;
 
-    for (int i = 0; i < splitPoint - 1; i++) {
+    // Move secondHalf to the start of the second split
+    for (int i = 0; i < splitPoint; i++) {
         secondHalf = secondHalf->next;
     }
-
-    Node* temp = secondHalf;
-    secondHalf = secondHalf->next;
-    temp->next = NULL;
 
     Deck* newDeck = malloc(sizeof(Deck));
     if (newDeck == NULL) {
         fprintf(stderr, "Unable to allocate memory for new Deck\n");
         exit(EXIT_FAILURE);
     }
-    newDeck->top = NULL;
+
+    Node *dummyNode = malloc(sizeof(Node));
+    if (dummyNode == NULL) {
+        fprintf(stderr, "Unable to allocate memory for dummy Node\n");
+        exit(EXIT_FAILURE);
+    }
+
+    dummyNode->card.suit = '\0';
+    dummyNode->card.value = '\0';
+    dummyNode->card.isVisible = false;
+    dummyNode->next = dummyNode;
+    dummyNode->prev = dummyNode;
+    dummyNode->isDummy = true;
+    newDeck->top = dummyNode;
     newDeck->size = 0;
 
-    Node** current = &newDeck->top;
+    Node* current = dummyNode;
 
-    while (firstHalf != NULL && secondHalf != NULL) {
-        if (firstHalf) {
-            *current = firstHalf;
+    // Interleave cards from firstHalf and secondHalf
+    while (firstHalf != originalDeck->top && secondHalf != originalDeck->top) {
+        if (firstHalf->isDummy) {
+            firstHalf = originalDeck->top; // Stop if reached dummy
+        } else {
+            current->next = firstHalf;
+            firstHalf->prev = current;
+            current = firstHalf;
             firstHalf = firstHalf->next;
-            current = &((*current)->next);
             newDeck->size++;
         }
-        if (secondHalf) {
-            *current = secondHalf;
+
+        if (secondHalf->isDummy) {
+            secondHalf = originalDeck->top; // Stop if reached dummy
+        } else if (newDeck->size < 52) {
+            current->next = secondHalf;
+            secondHalf->prev = current;
+            current = secondHalf;
             secondHalf = secondHalf->next;
-            current = &((*current)->next);
             newDeck->size++;
         }
     }
 
-    while (firstHalf != NULL) {
-        *current = firstHalf;
-        firstHalf = firstHalf->next;
-        current = &((*current)->next);
-        newDeck->size++;
-    }
-    while (secondHalf != NULL) {
-        *current = secondHalf;
-        secondHalf = secondHalf->next;
-        current = &((*current)->next);
+    // If one split still has cards (excluding dummy), add them
+    Node* remaining = (firstHalf != originalDeck->top) ? firstHalf : secondHalf;
+    while (remaining != originalDeck->top && newDeck->size < 52) {
+        if (remaining->isDummy) {
+            break; // Do not include dummy node
+        }
+        current->next = remaining;
+        remaining->prev = current;
+        current = remaining;
+        remaining = remaining->next;
         newDeck->size++;
     }
 
-    *current = NULL;
+    // Close the loop of the new deck
+    current->next = dummyNode;
+    dummyNode->prev = current;
+
     return newDeck;
 }
+
+

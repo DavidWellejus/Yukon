@@ -32,44 +32,45 @@ Table* initializeTable() {
 
 void dealToStartTable(Deck *deck, Table *table) {
     int cardCount = 0;
-    Node* cardToDeal = deck->top->next;
+    Node *cardToDeal = deck->top->next;
 
-    while (!cardToDeal->isDummy) {
-        for (int colIndex = 0; colIndex < 7; ++colIndex) {
-            if (cardToDeal->isDummy) break;
+    while (cardToDeal != deck->top && cardCount < 52) {
+        for (int i = 0; i < 7; ++i) {
+            if (cardToDeal == deck->top) break;
 
-            Node *columnDummy = table->columns[colIndex];
-            Node *lastCardInColumn = columnDummy;
-
-            while (!lastCardInColumn->next->isDummy) {
-                lastCardInColumn = lastCardInColumn->next;
+            Node *newNode = malloc(sizeof(Node));
+            if (newNode == NULL) {
+                fprintf(stderr, "Failed to allocate memory for a new card node.\n");
+                exit(EXIT_FAILURE);
             }
+            *newNode = *cardToDeal;
+            newNode->next = newNode->prev = NULL;
 
-            cardToDeal->prev = lastCardInColumn;
-            lastCardInColumn->next = cardToDeal;
+            Node *columnDummy = table->columns[i];
+            Node *lastCardInColumn = columnDummy->prev;
 
-            Node *nextCard = cardToDeal->next;
+            newNode->prev = lastCardInColumn;
+            newNode->next = columnDummy;
+            lastCardInColumn->next = newNode;
+            columnDummy->prev = newNode;
 
-            cardToDeal->next = columnDummy;
-            columnDummy->prev = cardToDeal;
-            cardToDeal = nextCard;
-
+            cardToDeal = cardToDeal->next;
             cardCount++;
-            if (cardToDeal->isDummy) break;
         }
     }
 
-    if (!cardToDeal->isDummy) {
-        fprintf(stderr, "Error: There are still cards left undistributed in the deck.\n");
+    if (cardCount < 52) {
+        fprintf(stderr, "Error: Not all cards have been distributed from the deck.\n");
     }
 }
+
 
 void printTable(Table *table) {
     if (table == NULL) {
         return;
     }
 
-    printf("C1\tC2\tC3\tC4\tC5\tC6\tC7\tF1\tF2\tF3\tF4\n\n");
+    printf("C1\tC2\tC3\tC4\tC5\tC6\tC7\n\n");
 
     int maxRows = 0;
     for (int col = 0; col < 7; col++) {
@@ -102,7 +103,6 @@ void printTable(Table *table) {
             }
         }
 
-        // Only print the foundation nodes on the first row
         if (row == 0) {
             for (int col = 7; col < 11; col++) {
                 Node *foundationNode = table->columns[col]->next;
