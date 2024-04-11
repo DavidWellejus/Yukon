@@ -75,26 +75,20 @@ int main() {
                     printf("Using random split: %d\n", split);
 
                 }
-
-
                 Deck* newDeck = splitter(deck, split);
-                freeDeck(deck);
-                deck = newDeck;
-                
-                dealToStartTable(deck, table);
+                free(table);
+                initializeTable(table);
+                dealToStartTable(newDeck, table);
                 printTable(table);
             }
 
             else if(strcmp(command, "SR") == 0){
                 shuffleDeck(deck);
-
                 dealToStartTable(deck, table);
                 printTable(table);
             }
 
-
             else if (strcmp(command, "QQ") == 0) {
-
                 break;
             } else {
                 printf("Unknown command.\n");
