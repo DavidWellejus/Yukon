@@ -103,15 +103,14 @@ void printTable(Table *table) {
             }
         }
 
-        if (row == 0) {
-            for (int col = 7; col < 11; col++) {
-                Node *foundationNode = table->columns[col]->next;
+        if (row % 2 == 0) {
+                Node *foundationNode = table->columns[7 + row / 2]->next;
                 if (!foundationNode->isDummy) {
-                    printf("[%c%c]\t", foundationNode->card.value, foundationNode->card.suit);
+                    printf("\t [%c%c] F%d\t", foundationNode->card.value, foundationNode->card.suit, 1 + row / 2);
                 } else {
-                    printf("[ ]\t");
+                    printf("\t [ ] F%d\t", 1 + row / 2);
                 }
-            }
+
         } else {
             printf("\t\t\t\t"); // Space for foundation columns
         }

@@ -58,8 +58,6 @@ Deck* shuffleDeck(Deck *deck) {
 
         }
     }
-
-
         return shuffledDeck;
 }
 
