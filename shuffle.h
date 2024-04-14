@@ -7,6 +7,6 @@
 
 #include "deck.h"
 
-void shuffleDeck(Deck *deck);
+Deck* shuffleDeck(Deck *deck);
 Deck* splitter(Deck* originalDeck, int splitPoint);
 #endif //YUKON_SHUFFLE_H

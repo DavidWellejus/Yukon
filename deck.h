@@ -36,7 +36,7 @@ typedef struct Table {
 void initializeDeck(Deck *deck);
 void freeDeck(Deck *deck);
 void freeTable(Table *table);
-void shuffleDeck(Deck* deck);
+Deck* shuffleDeck(Deck* deck);
 Table* initializeTable();
 void dealToStartTable(Deck *deck, Table *table);
 void printTable(Table *table);

@@ -11,7 +11,7 @@
 void printStartupScreen();
 void initializeDeck(Deck *deck);
 bool saveDeckToFile(const Deck *deck, const char *filename);
-void shuffleDeck(Deck* deck);
+Deck* shuffleDeck(Deck* deck);
 Deck* loadDeckFromFile(const char *filename);
 void dealToStartTable(Deck *deck, Table *table);
 void printTable(Table *table);
@@ -21,6 +21,7 @@ void printDeck(Deck* deck);
 void freeTable(Table *table);
 
 int main() {
+    srand(time(NULL));
     Deck *deck = malloc(sizeof(Deck));
     Table *table = initializeTable();
     if (deck == NULL || table == NULL) {
@@ -53,12 +54,16 @@ int main() {
                         printf("Error: Invalid file or unable to load deck.\n");
                     } else {
                         deck = loadDeckFromFile(fileName);
+                        free(table);
+                        initializeTable(table);
                         dealToStartTable(deck, table);
                         printTable(table);
                     }
                 }
                 else {
                     deck = loadDeckFromFile("C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/Deck.txt");
+                    free(table);
+                    initializeTable(table);
                     dealToStartTable(deck, table);
                     printTable(table);
                 }
@@ -76,16 +81,31 @@ int main() {
 
                 }
                 Deck* newDeck = splitter(deck, split);
+                free(deck);
+                deck = newDeck;
                 free(table);
                 initializeTable(table);
-                dealToStartTable(newDeck, table);
+                dealToStartTable(deck, table);
                 printTable(table);
             }
 
             else if(strcmp(command, "SR") == 0){
-                shuffleDeck(deck);
+                Deck* newDeck = shuffleDeck(deck);
+                free(deck);
+                deck = newDeck;
+                free(table);
+                initializeTable(table);
                 dealToStartTable(deck, table);
                 printTable(table);
+            }
+
+            else if(strcmp(command, "SD") == 0){
+                if (sscanf(inputLine, "%*s %s", fileName) == 1) {
+                    saveDeckToFile(deck, fileName);
+                }
+                else {
+                    saveDeckToFile(deck, "C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/cards.txt");
+                }
             }
 
             else if (strcmp(command, "QQ") == 0) {
