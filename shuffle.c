@@ -68,14 +68,13 @@ Deck* splitter(Deck* originalDeck, int splitPoint) {
     }
 
     if (splitPoint <= 0 || splitPoint >= originalDeck->size) {
-        srand((unsigned int)time(NULL));
         splitPoint = rand() % (originalDeck->size - 1) + 1;
     }
 
-    Node* firstHalf = originalDeck->top->next; // Skip dummy node
+    Node* firstHalf = originalDeck->top->next;
     Node* secondHalf = firstHalf;
 
-    // Move secondHalf to the start of the second split
+
     for (int i = 0; i < splitPoint; i++) {
         secondHalf = secondHalf->next;
     }
@@ -103,10 +102,10 @@ Deck* splitter(Deck* originalDeck, int splitPoint) {
 
     Node* current = dummyNode;
 
-    // Interleave cards from firstHalf and secondHalf
-    while (firstHalf != originalDeck->top && secondHalf != originalDeck->top) {
+
+    while ((firstHalf != originalDeck->top && secondHalf != originalDeck->top) && newDeck->size < 52) {
         if (firstHalf->isDummy) {
-            firstHalf = originalDeck->top; // Stop if reached dummy
+            firstHalf = originalDeck->top;
         } else {
             current->next = firstHalf;
             firstHalf->prev = current;
@@ -116,7 +115,7 @@ Deck* splitter(Deck* originalDeck, int splitPoint) {
         }
 
         if (secondHalf->isDummy) {
-            secondHalf = originalDeck->top; // Stop if reached dummy
+            secondHalf = originalDeck->top;
         } else if (newDeck->size < 52) {
             current->next = secondHalf;
             secondHalf->prev = current;
@@ -126,11 +125,10 @@ Deck* splitter(Deck* originalDeck, int splitPoint) {
         }
     }
 
-    // If one split still has cards (excluding dummy), add them
     Node* remaining = (firstHalf != originalDeck->top) ? firstHalf : secondHalf;
     while (remaining != originalDeck->top && newDeck->size < 52) {
         if (remaining->isDummy) {
-            break; // Do not include dummy node
+            break;
         }
         current->next = remaining;
         remaining->prev = current;
@@ -143,8 +141,5 @@ Deck* splitter(Deck* originalDeck, int splitPoint) {
     current->next = dummyNode;
     dummyNode->prev = current;
 
-    freeDeck(originalDeck);
     return newDeck;
 }
-
-

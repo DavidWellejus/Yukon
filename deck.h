@@ -34,12 +34,10 @@ typedef struct Table {
 
 
 void initializeDeck(Deck *deck);
-void freeDeck(Deck *deck);
-void freeTable(Table *table);
 Deck* shuffleDeck(Deck* deck);
 Table* initializeTable();
 void dealToStartTable(Deck *deck, Table *table);
-void printTable(Table *table);
+void printTable(Table *table, char command[256]);
 bool isValidCard(const char *cardStr);
 bool addCard(Deck *deck, const char value, const char suit);
 void setShowAllCards(Table *table, bool isVisible);

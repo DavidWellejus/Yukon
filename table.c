@@ -65,7 +65,7 @@ void dealToStartTable(Deck *deck, Table *table) {
 }
 
 
-void printTable(Table *table) {
+void printTable(Table *table, char lastCommand[256]) {
     if (table == NULL) {
         return;
     }
@@ -112,13 +112,13 @@ void printTable(Table *table) {
                 }
 
         } else {
-            printf("\t\t\t\t"); // Space for foundation columns
+            printf("\t\t\t\t");
         }
 
         printf("\n");
     }
 
-    printf("\nLAST Command: \nMessage: \n");
+    printf("\nLAST Command: %s \nMessage: \n", lastCommand);
 }
 
 
@@ -128,6 +128,40 @@ void setShowAllCards(Table *table, bool isVisible) {
         while (!current->isDummy) {
             current->card.isVisible = isVisible;
             current = current->next;
+        }
+    }
+}
+void dealToGameTable(Table* table, Deck* deck){
+    int cardCount = 0;
+    Node *cardToDeal = deck->top->next;
+    int cards_in_column[7] = {1, 6, 7, 8, 9, 10, 11};
+
+    while (cardToDeal != deck->top && cardCount < 52){
+        for(int i = 0; i < 7; i++){
+            for(int j = 0; j < cards_in_column[i]; j++){
+                Node *newNode = malloc(sizeof(Node));
+                if (newNode == NULL) {
+                    fprintf(stderr, "Failed to allocate memory for a new card node.\n");
+                    exit(EXIT_FAILURE);
+                }
+                *newNode = *cardToDeal;
+                if(j >= i){
+                    newNode->card.isVisible = true;
+                }
+                newNode->next = newNode->prev = NULL;
+
+                Node *columnDummy = table->columns[i];
+                Node *lastCardInColumn = columnDummy->prev;
+
+                newNode->prev = lastCardInColumn;
+                newNode->next = columnDummy;
+                lastCardInColumn->next = newNode;
+                columnDummy->prev = newNode;
+
+                cardToDeal = cardToDeal->next;
+                cardCount++;
+
+            }
         }
     }
 }

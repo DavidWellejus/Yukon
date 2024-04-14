@@ -49,7 +49,7 @@ Deck* loadDeckFromFile(const char *filename) {
             // Tilføjer kortet efter dummy-noden
             if (!addCard(deck, cardStr[0], cardStr[1])) {
                 // Hvis tilføjelse af kort mislykkes, frigiv ressourcer og afslut
-                freeDeck(deck);
+                free(deck);
                 fclose(file);
                 return NULL;
             }
@@ -57,7 +57,7 @@ Deck* loadDeckFromFile(const char *filename) {
         else {
             // Ugyldigt kort fundet
             fprintf(stderr, "Error: Invalid card format in file.\n");
-            freeDeck(deck);
+            free(deck);
             fclose(file);
             return NULL;
         }

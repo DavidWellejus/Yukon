@@ -28,31 +28,6 @@ void initializeDeck(Deck *deck){
 }
 
 
-void freeDeck(Deck *deck) {
-    Node *current = deck->top;
-    while (current != NULL) {
-        Node *temp = current;
-        current = current->next;
-        free(temp);
-    }
-    free(deck);
-}
-
-void freeTable(Table *table) {
-    if (table == NULL) {
-        return;
-    }
-
-    for (int i = 0; i < 11; i++) {
-        if (table->columns[i] != NULL) {
-            freeDeck(table->columns[i]);
-            table->columns[i] = NULL;
-        }
-    }
-    free(table);
-}
-
-
 bool isValidCard(const char *cardStr) {
     const char *validValues = "A23456789TJQK";
     const char *validSuits = "CDHS";

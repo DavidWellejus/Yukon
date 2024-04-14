@@ -14,11 +14,12 @@ bool saveDeckToFile(const Deck *deck, const char *filename);
 Deck* shuffleDeck(Deck* deck);
 Deck* loadDeckFromFile(const char *filename);
 void dealToStartTable(Deck *deck, Table *table);
-void printTable(Table *table);
+void printTable(Table *table, char lastCommand[256]);
 void setShowAllCards(Table *table, bool isVisible);
 Deck* splitter(Deck* deck, int split);
 void printDeck(Deck* deck);
-void freeTable(Table *table);
+void dealToGameTable(Table* table, Deck* deck);
+
 
 int main() {
     srand(time(NULL));
@@ -57,7 +58,7 @@ int main() {
                         free(table);
                         initializeTable(table);
                         dealToStartTable(deck, table);
-                        printTable(table);
+                        printTable(table, command);
                     }
                 }
                 else {
@@ -65,17 +66,17 @@ int main() {
                     free(table);
                     initializeTable(table);
                     dealToStartTable(deck, table);
-                    printTable(table);
+                    printTable(table, command);
                 }
             }
             else if (strcmp(command, "SW") == 0) {
                 setShowAllCards(table, true);
-                printTable(table);
+                printTable(table, command);
             }
 
-            else if (strcmp(command, "SI") == 0){
+            else if (strcmp(command, "SI") == 0) {
                 int split;
-                if (sscanf(inputLine, "%*s %d", &split) != 1 || split <= 0 || split >= deck->size) {
+                if (sscanf(inputLine, "%*s %d", &split) == 1) {
                     split = rand() % (deck->size - 1) + 1;
                     printf("Using random split: %d\n", split);
 
@@ -86,7 +87,8 @@ int main() {
                 free(table);
                 initializeTable(table);
                 dealToStartTable(deck, table);
-                printTable(table);
+                setShowAllCards(table, true);
+                printTable(table, command);
             }
 
             else if(strcmp(command, "SR") == 0){
@@ -96,18 +98,26 @@ int main() {
                 free(table);
                 initializeTable(table);
                 dealToStartTable(deck, table);
-                printTable(table);
+                setShowAllCards(table, true);
+                printTable(table, command);
             }
 
             else if(strcmp(command, "SD") == 0){
                 if (sscanf(inputLine, "%*s %s", fileName) == 1) {
                     saveDeckToFile(deck, fileName);
+                    printTable(table, command);
                 }
                 else {
                     saveDeckToFile(deck, "C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/cards.txt");
+                    printTable(table, command);
                 }
             }
-
+            else if(strcmp(command, "P") == 0){
+                free(table);
+                initializeTable(table);
+                dealToGameTable(table, deck);
+                printTable(table, command);
+            }
             else if (strcmp(command, "QQ") == 0) {
                 break;
             } else {
