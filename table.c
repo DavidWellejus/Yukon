@@ -74,7 +74,7 @@ void printTable(Table *table, char lastCommand[256]) {
 
     bool allColumnsDone;
     int row = 0;
-
+    int i = 0;
     do {
         allColumnsDone = true;
         for (int col = 0; col < 7; col++) {
@@ -96,14 +96,14 @@ void printTable(Table *table, char lastCommand[256]) {
             }
         }
 
-        if (row % 2 == 0) {
+        if (row % 2 == 0 && i < 4) {
             Node *foundationNode = table->columns[7 + row / 2]->next;
             if (!foundationNode->isDummy) {
                 printf("\t [%c%c] F%d\t", foundationNode->card.value, foundationNode->card.suit, 1 + row / 2);
             } else {
                 printf("\t [ ] F%d\t", 1 + row / 2);
             }
-
+            i++;
         } else {
             printf("\t\t\t\t\t");
         }
