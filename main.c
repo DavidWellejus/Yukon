@@ -19,6 +19,7 @@ void setShowAllCards(Table *table, bool isVisible);
 Deck* splitter(Deck* deck, int split);
 void printDeck(Deck* deck);
 void dealToGameTable(Table* table, Deck* deck);
+void clearTable(Table *table);
 
 
 int main() {
@@ -55,16 +56,14 @@ int main() {
                         printf("Error: Invalid file or unable to load deck.\n");
                     } else {
                         deck = loadDeckFromFile(fileName);
-                        free(table);
-                        initializeTable(table);
+                        clearTable(table);
                         dealToStartTable(deck, table);
                         printTable(table, command);
                     }
                 }
                 else {
                     deck = loadDeckFromFile("C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/Deck.txt");
-                    free(table);
-                    initializeTable(table);
+                    clearTable(table);
                     dealToStartTable(deck, table);
                     printTable(table, command);
                 }
@@ -84,8 +83,7 @@ int main() {
                 Deck* newDeck = splitter(deck, split);
                 free(deck);
                 deck = newDeck;
-                free(table);
-                initializeTable(table);
+                clearTable(table);
                 dealToStartTable(deck, table);
                 setShowAllCards(table, true);
                 printTable(table, command);
@@ -95,8 +93,7 @@ int main() {
                 Deck* newDeck = shuffleDeck(deck);
                 free(deck);
                 deck = newDeck;
-                free(table);
-                initializeTable(table);
+                clearTable(table);
                 dealToStartTable(deck, table);
                 setShowAllCards(table, true);
                 printTable(table, command);
@@ -113,8 +110,7 @@ int main() {
                 }
             }
             else if(strcmp(command, "P") == 0){
-                free(table);
-                initializeTable(table);
+                clearTable(table);
                 dealToGameTable(table, deck);
                 printTable(table, command);
             }
