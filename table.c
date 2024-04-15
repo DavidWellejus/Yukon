@@ -65,61 +65,54 @@ void dealToStartTable(Deck *deck, Table *table) {
 }
 
 
-void printTable(Table *table) {
+void printTable(Table *table, char lastCommand[256]) {
     if (table == NULL) {
         return;
     }
 
     printf("C1\tC2\tC3\tC4\tC5\tC6\tC7\n\n");
 
-    int maxRows = 0;
-    for (int col = 0; col < 7; col++) {
-        int count = 0;
-        Node *current = table->columns[col]->next;
-        while (!current->isDummy) {
-            count++;
-            current = current->next;
-        }
-        if (count > maxRows) {
-            maxRows = count;
-        }
-    }
-
-    for (int row = 0; row < maxRows; row++) {
+    bool allColumnsDone;
+    int row = 0;
+    int i = 0;
+    do {
+        allColumnsDone = true;
         for (int col = 0; col < 7; col++) {
             Node *currentNode = table->columns[col]->next;
-            for (int depth = 0; depth < row && !currentNode->isDummy; depth++) {
+
+            for (int depth = 0; depth < row && currentNode != table->columns[col]; depth++) {
                 currentNode = currentNode->next;
             }
 
-            if (!currentNode->isDummy) {
-                if(currentNode->card.isVisible){
+            if (currentNode != table->columns[col] && !currentNode->isDummy) {
+                if (currentNode->card.isVisible) {
                     printf("%c%c\t", currentNode->card.value, currentNode->card.suit);
                 } else {
                     printf("[ ]\t");
                 }
+                allColumnsDone = false;
             } else {
                 printf("\t");
             }
         }
 
-        if (row == 0) {
-            for (int col = 7; col < 11; col++) {
-                Node *foundationNode = table->columns[col]->next;
-                if (!foundationNode->isDummy) {
-                    printf("[%c%c]\t", foundationNode->card.value, foundationNode->card.suit);
-                } else {
-                    printf("[ ]\t");
-                }
+        if (row % 2 == 0 && i < 4) {
+            Node *foundationNode = table->columns[7 + row / 2]->next;
+            if (!foundationNode->isDummy) {
+                printf("\t [%c%c] F%d\t", foundationNode->card.value, foundationNode->card.suit, 1 + row / 2);
+            } else {
+                printf("\t [ ] F%d\t", 1 + row / 2);
             }
+            i++;
         } else {
-            printf("\t\t\t\t"); // Space for foundation columns
+            printf("\t\t\t\t\t");
         }
 
         printf("\n");
-    }
+        row++;
+    } while (!allColumnsDone);
 
-    printf("\nLAST Command: \nMessage: \n");
+    printf("\nLAST Command: %s\nMessage: \n", lastCommand);
 }
 
 
@@ -132,3 +125,64 @@ void setShowAllCards(Table *table, bool isVisible) {
         }
     }
 }
+void dealToGameTable(Table* table, Deck* deck) {
+    Node *cardToDeal = deck->top->next;
+    int cards_in_column[7] = {1, 6, 7, 8, 9, 10, 11};
+    int cardsDealtToColumn[7] = {0};
+
+    while (cardToDeal != deck->top) {
+        for (int i = 0; i < 7; i++) {
+            if (cardsDealtToColumn[i] < cards_in_column[i]) {
+                Node *newNode = malloc(sizeof(Node));
+                if (newNode == NULL) {
+                    fprintf(stderr, "Failed to allocate memory for a new card node.\n");
+                    exit(EXIT_FAILURE);
+                }
+
+                *newNode = *cardToDeal;
+                newNode->card.isVisible = (cardsDealtToColumn[i] >= i);
+
+                Node *lastCardInColumn = table->columns[i];
+                while (lastCardInColumn->next != table->columns[i]) {
+                    lastCardInColumn = lastCardInColumn->next;
+                }
+
+                newNode->next = table->columns[i];
+                newNode->prev = lastCardInColumn;
+                lastCardInColumn->next = newNode;
+                table->columns[i]->prev = newNode;
+
+                cardToDeal = cardToDeal->next;
+                cardsDealtToColumn[i]++;
+                if (cardToDeal == deck->top) break;
+            }
+        }
+    }
+
+    for (int i = 0; i < 7; i++) {
+        if (cardsDealtToColumn[i] != cards_in_column[i]) {
+            fprintf(stderr, "Error: Not all cards were distributed correctly in column %d.\n", i+1);
+        }
+    }
+}
+
+
+
+void clearTable(Table *table) {
+    if (table == NULL) {
+        return; // In case the table has not been initialized
+    }
+
+    for (int i = 0; i < 11; i++) { // Assuming there are 11 columns including foundations
+        Node *current = table->columns[i]->next;
+        while (current != table->columns[i]) { // Loop until the dummy node is encountered
+            Node *temp = current;
+            current = current->next;
+            free(temp); // Free each node except the dummy
+        }
+        // Reset the dummy nodes to point to themselves
+        table->columns[i]->next = table->columns[i];
+        table->columns[i]->prev = table->columns[i];
+    }
+}
+
