@@ -112,6 +112,23 @@ void printTable(Table *table, char lastCommand[256]) {
         row++;
     } while (!allColumnsDone);
 
+    if(row < 8){
+        while(i < 4){
+            if (row % 2 == 0) {
+                Node *foundationNode = table->columns[7 + row / 2]->next;
+                if (!foundationNode->isDummy) {
+                    printf("\t\t\t\t\t\t\t\t [%c%c] F%d\n", foundationNode->card.value, foundationNode->card.suit, 1 + row / 2);
+                } else {
+                    printf("\t\t\t\t\t\t\t\t [ ] F%d\n", 1 + row / 2);
+                }
+                i++;
+                row++;
+            } else {
+                printf("\n");
+                row++;
+            }
+        }
+    }
     printf("\nLAST Command: %s\nMessage: \n", lastCommand);
 }
 

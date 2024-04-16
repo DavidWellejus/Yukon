@@ -8,7 +8,7 @@
 #include "shuffle.h"
 #include "table.h"
 
-void printStartupScreen();
+
 void initializeDeck(Deck *deck);
 bool saveDeckToFile(const Deck *deck, const char *filename);
 Deck* shuffleDeck(Deck* deck);
@@ -31,14 +31,16 @@ int main() {
         exit(EXIT_FAILURE);
     }
 
-    printStartupScreen();
+    printTable(table, "");
 
     char inputLine[256];
     char command[256];
     char fileName[256];
 
-
+    int t = 0;
     while (true) {
+        if(strcmp(command, "P") == 0) t = 1;
+        if(strcmp(command, "Q") == 0 && t == 1) t = 0;
         printf("INPUT > ");
         fflush(stdout);
 
@@ -47,101 +49,95 @@ int main() {
             continue;
         }
 
-        if (sscanf(inputLine, "%s", command) == 1) {
 
-            if (strcmp(command, "LD") == 0) {
-                if (sscanf(inputLine, "%*s %s", fileName) == 1) {
+            if (sscanf(inputLine, "%s", command) == 1) {
 
-                    if (!loadDeckFromFile(fileName)) {
-                        printf("Error: Invalid file or unable to load deck.\n");
-                    } else {
-                        deck = loadDeckFromFile(fileName);
-                        clearTable(table);
-                        dealToStartTable(deck, table);
+                if(t == 0){
+                    if (strcmp(command, "LD") == 0) {
+                        if (sscanf(inputLine, "%*s %s", fileName) == 1) {
+
+                            if (!loadDeckFromFile(fileName)) {
+                                printf("Error: Invalid file or unable to load deck.\n");
+                            } else {
+                                deck = loadDeckFromFile(fileName);
+                                clearTable(table);
+                                dealToStartTable(deck, table);
+                                printTable(table, command);
+                            }
+                        }
+                        else {
+                            deck = loadDeckFromFile("C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/Deck.txt");
+                            clearTable(table);
+                            dealToStartTable(deck, table);
+                            printTable(table, command);
+                        }
+                    }
+                    else if (strcmp(command, "SW") == 0) {
+                        setShowAllCards(table, true);
                         printTable(table, command);
                     }
+
+                    else if (strcmp(command, "SI") == 0) {
+                        int split;
+                        if (sscanf(inputLine, "%*s %d", &split) == 1) {
+                            split = rand() % (deck->size - 1) + 1;
+                            printf("Using random split: %d\n", split);
+
+                        }
+                        Deck* newDeck = splitter(deck, split);
+                        free(deck);
+                        deck = newDeck;
+                        clearTable(table);
+                        dealToStartTable(deck, table);
+                        setShowAllCards(table, true);
+                        printTable(table, command);
+                    }
+
+                    else if(strcmp(command, "SR") == 0){
+                        Deck* newDeck = shuffleDeck(deck);
+                        free(deck);
+                        deck = newDeck;
+                        clearTable(table);
+                        dealToStartTable(deck, table);
+                        setShowAllCards(table, true);
+                        printTable(table, command);
+                    }
+
+                    else if(strcmp(command, "SD") == 0){
+                        if (sscanf(inputLine, "%*s %s", fileName) == 1) {
+                            saveDeckToFile(deck, fileName);
+                            printTable(table, command);
+                        }
+                        else {
+                            saveDeckToFile(deck, "C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/cards.txt");
+                            printTable(table, command);
+                        }
+                    }
+                    else if(strcmp(command, "P") == 0){
+                        clearTable(table);
+                        dealToGameTable(table, deck);
+                        printTable(table, command);
+                    }
+                    else if (strcmp(command, "QQ") == 0) {
+                        break;
+                    } else {
+                        printf("Unknown command.\n");
+                    }
                 }
-                else {
-                    deck = loadDeckFromFile("C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/Deck.txt");
+
+                if(t == 1){
+                    if (strcmp(command, "Q") == 0) t = 0;
                     clearTable(table);
-                    dealToStartTable(deck, table);
                     printTable(table, command);
                 }
             }
-            else if (strcmp(command, "SW") == 0) {
-                setShowAllCards(table, true);
-                printTable(table, command);
+            else {
+                printf("Error: No command entered.\n");
             }
-
-            else if (strcmp(command, "SI") == 0) {
-                int split;
-                if (sscanf(inputLine, "%*s %d", &split) == 1) {
-                    split = rand() % (deck->size - 1) + 1;
-                    printf("Using random split: %d\n", split);
-
-                }
-                Deck* newDeck = splitter(deck, split);
-                free(deck);
-                deck = newDeck;
-                clearTable(table);
-                dealToStartTable(deck, table);
-                setShowAllCards(table, true);
-                printTable(table, command);
-            }
-
-            else if(strcmp(command, "SR") == 0){
-                Deck* newDeck = shuffleDeck(deck);
-                free(deck);
-                deck = newDeck;
-                clearTable(table);
-                dealToStartTable(deck, table);
-                setShowAllCards(table, true);
-                printTable(table, command);
-            }
-
-            else if(strcmp(command, "SD") == 0){
-                if (sscanf(inputLine, "%*s %s", fileName) == 1) {
-                    saveDeckToFile(deck, fileName);
-                    printTable(table, command);
-                }
-                else {
-                    saveDeckToFile(deck, "C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/cards.txt");
-                    printTable(table, command);
-                }
-            }
-            else if(strcmp(command, "P") == 0){
-                clearTable(table);
-                dealToGameTable(table, deck);
-                printTable(table, command);
-            }
-            else if (strcmp(command, "QQ") == 0) {
-                break;
-            } else {
-                printf("Unknown command.\n");
-            }
-        } else {
-            printf("Error: No command entered.\n");
-        }
     }
 
     free(deck);
     free(table);
 
     return 0;
-}
-
-void printStartupScreen() {
-
-    printf("C1\tC2\tC3\tC4\tC5\tC6\tC7\n\n");
-
-    printf("\t\t\t\t\t\t\t\t[ ] F1\n");
-    printf("\t\t\t\t\t\t\t\t\t\n");
-    printf("\t\t\t\t\t\t\t\t[ ] F2\n");
-    printf("\t\t\t\t\t\t\t\t\t\n");
-    printf("\t\t\t\t\t\t\t\t[ ] F3\n");
-    printf("\t\t\t\t\t\t\t\t\t\n");
-    printf("\t\t\t\t\t\t\t\t[ ] F4\n\n");
-
-    printf("LAST Command:\n");
-    printf("Message:\n");
 }
