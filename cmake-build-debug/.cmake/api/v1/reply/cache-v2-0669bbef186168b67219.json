@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "c:/DTU/2.Semester/02322MaskinaerProgrammering/Lab/project2_machine/Yukon/cmake-build-debug"
+			"value" : "c:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -431,7 +431,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/DTU/2.Semester/02322MaskinaerProgrammering/Lab/project2_machine/Yukon/cmake-build-debug/CMakeFiles/pkgRedirects"
+			"value" : "C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -543,7 +543,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "C:/Program Files/JetBrains/CLion 2023.3.4/bin/ninja/win/x64/ninja.exe"
+			"value" : "C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/ninja/win/x64/ninja.exe"
 		},
 		{
 			"name" : "CMAKE_MODULE_LINKER_FLAGS",
@@ -1126,6 +1126,470 @@
 			"value" : "FALSE"
 		},
 		{
+			"name" : "FIND_PACKAGE_MESSAGE_DETAILS_PkgConfig",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Details about finding PkgConfig"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "[C:/msys64/mingw64/bin/pkg-config.exe][v0.29.2()]"
+		},
+		{
+			"name" : "GTK3_CFLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "-DLIBDEFLATE_DLL;-IC:/msys64/mingw64/include/gtk-3.0;-IC:/msys64/mingw64/include;-IC:/msys64/mingw64/include/pango-1.0;-IC:/msys64/mingw64/include/harfbuzz;-IC:/msys64/mingw64/include/pango-1.0;-IC:/msys64/mingw64/include/fribidi;-IC:/msys64/mingw64/include;-IC:/msys64/mingw64/include/atk-1.0;-IC:/msys64/mingw64/include/cairo;-IC:/msys64/mingw64/include;-IC:/msys64/mingw64/include/freetype2;-IC:/msys64/mingw64/include/harfbuzz;-IC:/msys64/mingw64/include;-IC:/msys64/mingw64/include/pixman-1;-IC:/msys64/mingw64/include/gdk-pixbuf-2.0;-IC:/msys64/mingw64/include/libpng16;-IC:/msys64/mingw64/include;-IC:/msys64/mingw64/include/webp;-IC:/msys64/mingw64/include;-IC:/msys64/mingw64/include/glib-2.0;-IC:/msys64/mingw64/lib/glib-2.0/include;-IC:/msys64/mingw64/include"
+		},
+		{
+			"name" : "GTK3_CFLAGS_I",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "GTK3_CFLAGS_OTHER",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "-DLIBDEFLATE_DLL"
+		},
+		{
+			"name" : "GTK3_FOUND",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "1"
+		},
+		{
+			"name" : "GTK3_INCLUDEDIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "C:/msys64/mingw64/include"
+		},
+		{
+			"name" : "GTK3_INCLUDE_DIRS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "C:/msys64/mingw64/include/gtk-3.0;C:/msys64/mingw64/include;C:/msys64/mingw64/include/pango-1.0;C:/msys64/mingw64/include/harfbuzz;C:/msys64/mingw64/include/pango-1.0;C:/msys64/mingw64/include/fribidi;C:/msys64/mingw64/include;C:/msys64/mingw64/include/atk-1.0;C:/msys64/mingw64/include/cairo;C:/msys64/mingw64/include;C:/msys64/mingw64/include/freetype2;C:/msys64/mingw64/include/harfbuzz;C:/msys64/mingw64/include;C:/msys64/mingw64/include/pixman-1;C:/msys64/mingw64/include/gdk-pixbuf-2.0;C:/msys64/mingw64/include/libpng16;C:/msys64/mingw64/include;C:/msys64/mingw64/include/webp;C:/msys64/mingw64/include;C:/msys64/mingw64/include/glib-2.0;C:/msys64/mingw64/lib/glib-2.0/include;C:/msys64/mingw64/include"
+		},
+		{
+			"name" : "GTK3_LDFLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "-LC:/msys64/mingw64/lib;-lgtk-3;-lgdk-3;-lz;-lgdi32;-limm32;-lshell32;-lole32;-luuid;-lwinmm;-ldwmapi;-lsetupapi;-lcfgmgr32;-lhid;-lwinspool;-lcomctl32;-lcomdlg32;-lpangowin32-1.0;-lpangocairo-1.0;-lpango-1.0;-lharfbuzz;-latk-1.0;-lcairo-gobject;-lcairo;-lgdk_pixbuf-2.0;-lgio-2.0;-lgobject-2.0;-lglib-2.0;-lintl"
+		},
+		{
+			"name" : "GTK3_LDFLAGS_OTHER",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "GTK3_LIBDIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "C:/msys64/mingw64/lib"
+		},
+		{
+			"name" : "GTK3_LIBRARIES",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "gtk-3;gdk-3;z;gdi32;imm32;shell32;ole32;uuid;winmm;dwmapi;setupapi;cfgmgr32;hid;winspool;comctl32;comdlg32;pangowin32-1.0;pangocairo-1.0;pango-1.0;harfbuzz;atk-1.0;cairo-gobject;cairo;gdk_pixbuf-2.0;gio-2.0;gobject-2.0;glib-2.0;intl"
+		},
+		{
+			"name" : "GTK3_LIBRARY_DIRS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "C:/msys64/mingw64/lib"
+		},
+		{
+			"name" : "GTK3_LIBS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "GTK3_LIBS_L",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "GTK3_LIBS_OTHER",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "GTK3_LIBS_PATHS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "GTK3_MODULE_NAME",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "gtk+-3.0"
+		},
+		{
+			"name" : "GTK3_PREFIX",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "C:/msys64/mingw64"
+		},
+		{
+			"name" : "GTK3_STATIC_CFLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "-DLIBDEFLATE_DLL;-IC:/msys64/mingw64/include/gtk-3.0;-IC:/msys64/mingw64/include;-IC:/msys64/mingw64/include/pango-1.0;-IC:/msys64/mingw64/include/harfbuzz;-IC:/msys64/mingw64/include/pango-1.0;-IC:/msys64/mingw64/include/fribidi;-IC:/msys64/mingw64/include;-IC:/msys64/mingw64/include/atk-1.0;-IC:/msys64/mingw64/include/cairo;-IC:/msys64/mingw64/include;-IC:/msys64/mingw64/include/freetype2;-IC:/msys64/mingw64/include/harfbuzz;-IC:/msys64/mingw64/include;-IC:/msys64/mingw64/include/pixman-1;-IC:/msys64/mingw64/include/gdk-pixbuf-2.0;-IC:/msys64/mingw64/include/libpng16;-IC:/msys64/mingw64/include;-IC:/msys64/mingw64/include/webp;-IC:/msys64/mingw64/include;-IC:/msys64/mingw64/include/glib-2.0;-IC:/msys64/mingw64/lib/glib-2.0/include;-IC:/msys64/mingw64/include"
+		},
+		{
+			"name" : "GTK3_STATIC_CFLAGS_I",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "GTK3_STATIC_CFLAGS_OTHER",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "-DLIBDEFLATE_DLL"
+		},
+		{
+			"name" : "GTK3_STATIC_INCLUDE_DIRS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "C:/msys64/mingw64/include/gtk-3.0;C:/msys64/mingw64/include;C:/msys64/mingw64/include/pango-1.0;C:/msys64/mingw64/include/harfbuzz;C:/msys64/mingw64/include/pango-1.0;C:/msys64/mingw64/include/fribidi;C:/msys64/mingw64/include;C:/msys64/mingw64/include/atk-1.0;C:/msys64/mingw64/include/cairo;C:/msys64/mingw64/include;C:/msys64/mingw64/include/freetype2;C:/msys64/mingw64/include/harfbuzz;C:/msys64/mingw64/include;C:/msys64/mingw64/include/pixman-1;C:/msys64/mingw64/include/gdk-pixbuf-2.0;C:/msys64/mingw64/include/libpng16;C:/msys64/mingw64/include;C:/msys64/mingw64/include/webp;C:/msys64/mingw64/include;C:/msys64/mingw64/include/glib-2.0;C:/msys64/mingw64/lib/glib-2.0/include;C:/msys64/mingw64/include"
+		},
+		{
+			"name" : "GTK3_STATIC_LDFLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "-LC:/msys64/mingw64/lib;-LC:/msys64/mingw64/lib/../lib;-LC:/msys64/mingw64/lib;-lgtk-3;-lgdk-3;-lz;-lgdi32;-limm32;-lshell32;-lole32;-luuid;-lwinmm;-ldwmapi;-lsetupapi;-lcfgmgr32;-lhid;-lwinspool;-lcomctl32;-lcomdlg32;-lgdi32;-lmsimg32;-lepoxy;-lopengl32;-lgdi32;-lpangocairo-1.0;-lm;-lgdi32;-lpangoft2-1.0;-lm;-lpangowin32-1.0;-lm;-lgdi32;-ldwrite;-lharfbuzz-gobject;-lpango-1.0;-lm;-lfribidi;-lthai;-ldatrie;-latk-1.0;-lcairo-gobject;-lm;-lgdi32;-lmsimg32;-ldwrite;-ld2d1;-lwindowscodecs;-lcairo;-lm;-lgdi32;-lmsimg32;-ldwrite;-ld2d1;-lwindowscodecs;-lfontconfig;-liconv;-lexpat;-lm;-lfreetype;-lbz2;-lharfbuzz;-lm;-lusp10;-lgdi32;-lrpcrt4;-lgraphite2;-lbrotlidec;-lbrotlicommon;-lpixman-1;-lm;-pthread;-lgdk_pixbuf-2.0;-lm;-lintl;-lgdiplus;-lole32;-lpng16;-lz;-ltiff;-lwebp;-lzstd;-llzma;-lLerc;-ljbig;-ljpeg;-ldeflate;-lz;-lwebp;-lsharpyuv;-lzstd;-llzma;-ljpeg;-ldeflate;-lgio-2.0;-lintl;-lshlwapi;-ldnsapi;-liphlpapi;-lws2_32;-lgmodule-2.0;-lintl;-lz;-lgobject-2.0;-lintl;-lffi;-lglib-2.0;-lintl;-lws2_32;-lole32;-lwinmm;-lshlwapi;-luuid;-lm;-lpcre2-8"
+		},
+		{
+			"name" : "GTK3_STATIC_LDFLAGS_OTHER",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "-pthread"
+		},
+		{
+			"name" : "GTK3_STATIC_LIBDIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "GTK3_STATIC_LIBRARIES",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "gtk-3;gdk-3;z;gdi32;imm32;shell32;ole32;uuid;winmm;dwmapi;setupapi;cfgmgr32;hid;winspool;comctl32;comdlg32;gdi32;msimg32;epoxy;opengl32;gdi32;pangocairo-1.0;m;gdi32;pangoft2-1.0;m;pangowin32-1.0;m;gdi32;dwrite;harfbuzz-gobject;pango-1.0;m;fribidi;thai;datrie;atk-1.0;cairo-gobject;m;gdi32;msimg32;dwrite;d2d1;windowscodecs;cairo;m;gdi32;msimg32;dwrite;d2d1;windowscodecs;fontconfig;iconv;expat;m;freetype;bz2;harfbuzz;m;usp10;gdi32;rpcrt4;graphite2;brotlidec;brotlicommon;pixman-1;m;gdk_pixbuf-2.0;m;intl;gdiplus;ole32;png16;z;tiff;webp;zstd;lzma;Lerc;jbig;jpeg;deflate;z;webp;sharpyuv;zstd;lzma;jpeg;deflate;gio-2.0;intl;shlwapi;dnsapi;iphlpapi;ws2_32;gmodule-2.0;intl;z;gobject-2.0;intl;ffi;glib-2.0;intl;ws2_32;ole32;winmm;shlwapi;uuid;m;pcre2-8"
+		},
+		{
+			"name" : "GTK3_STATIC_LIBRARY_DIRS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "C:/msys64/mingw64/lib;C:/msys64/mingw64/lib/../lib;C:/msys64/mingw64/lib"
+		},
+		{
+			"name" : "GTK3_STATIC_LIBS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "GTK3_STATIC_LIBS_L",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "GTK3_STATIC_LIBS_OTHER",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "GTK3_STATIC_LIBS_PATHS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "GTK3_VERSION",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "3.24.39"
+		},
+		{
+			"name" : "GTK3_gtk+-3.0_INCLUDEDIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "GTK3_gtk+-3.0_LIBDIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "GTK3_gtk+-3.0_PREFIX",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "GTK3_gtk+-3.0_VERSION",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "PKG_CONFIG_ARGN",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Arguments to supply to pkg-config"
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "PKG_CONFIG_EXECUTABLE",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "pkg-config executable"
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/msys64/mingw64/bin/pkg-config.exe"
+		},
+		{
 			"name" : "Yukon_BINARY_DIR",
 			"properties" : 
 			[
@@ -1135,7 +1599,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/DTU/2.Semester/02322MaskinaerProgrammering/Lab/project2_machine/Yukon/cmake-build-debug"
+			"value" : "C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/cmake-build-debug"
 		},
 		{
 			"name" : "Yukon_IS_TOP_LEVEL",
@@ -1159,7 +1623,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/DTU/2.Semester/02322MaskinaerProgrammering/Lab/project2_machine/Yukon"
+			"value" : "C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon"
 		},
 		{
 			"name" : "_CMAKE_LINKER_PUSHPOP_STATE_SUPPORTED",
@@ -1172,6 +1636,490 @@
 			],
 			"type" : "INTERNAL",
 			"value" : "TRUE"
+		},
+		{
+			"name" : "__pkg_config_arguments_GTK3",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "REQUIRED;gtk+-3.0"
+		},
+		{
+			"name" : "__pkg_config_checked_GTK3",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "1"
+		},
+		{
+			"name" : "pkgcfg_lib_GTK3_atk-1.0",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/msys64/mingw64/lib/libatk-1.0.dll.a"
+		},
+		{
+			"name" : "pkgcfg_lib_GTK3_cairo",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/msys64/mingw64/lib/libcairo.dll.a"
+		},
+		{
+			"name" : "pkgcfg_lib_GTK3_cairo-gobject",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/msys64/mingw64/lib/libcairo-gobject.dll.a"
+		},
+		{
+			"name" : "pkgcfg_lib_GTK3_cfgmgr32",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "pkgcfg_lib_GTK3_cfgmgr32-NOTFOUND"
+		},
+		{
+			"name" : "pkgcfg_lib_GTK3_comctl32",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "pkgcfg_lib_GTK3_comctl32-NOTFOUND"
+		},
+		{
+			"name" : "pkgcfg_lib_GTK3_comdlg32",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "pkgcfg_lib_GTK3_comdlg32-NOTFOUND"
+		},
+		{
+			"name" : "pkgcfg_lib_GTK3_dwmapi",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "pkgcfg_lib_GTK3_dwmapi-NOTFOUND"
+		},
+		{
+			"name" : "pkgcfg_lib_GTK3_gdi32",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "pkgcfg_lib_GTK3_gdi32-NOTFOUND"
+		},
+		{
+			"name" : "pkgcfg_lib_GTK3_gdk-3",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/msys64/mingw64/lib/libgdk-3.dll.a"
+		},
+		{
+			"name" : "pkgcfg_lib_GTK3_gdk_pixbuf-2.0",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/msys64/mingw64/lib/libgdk_pixbuf-2.0.dll.a"
+		},
+		{
+			"name" : "pkgcfg_lib_GTK3_gio-2.0",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/msys64/mingw64/lib/libgio-2.0.dll.a"
+		},
+		{
+			"name" : "pkgcfg_lib_GTK3_glib-2.0",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/msys64/mingw64/lib/libglib-2.0.dll.a"
+		},
+		{
+			"name" : "pkgcfg_lib_GTK3_gobject-2.0",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/msys64/mingw64/lib/libgobject-2.0.dll.a"
+		},
+		{
+			"name" : "pkgcfg_lib_GTK3_gtk-3",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/msys64/mingw64/lib/libgtk-3.dll.a"
+		},
+		{
+			"name" : "pkgcfg_lib_GTK3_harfbuzz",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/msys64/mingw64/lib/libharfbuzz.dll.a"
+		},
+		{
+			"name" : "pkgcfg_lib_GTK3_hid",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "pkgcfg_lib_GTK3_hid-NOTFOUND"
+		},
+		{
+			"name" : "pkgcfg_lib_GTK3_imm32",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "pkgcfg_lib_GTK3_imm32-NOTFOUND"
+		},
+		{
+			"name" : "pkgcfg_lib_GTK3_intl",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/msys64/mingw64/lib/libintl.dll.a"
+		},
+		{
+			"name" : "pkgcfg_lib_GTK3_ole32",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "pkgcfg_lib_GTK3_ole32-NOTFOUND"
+		},
+		{
+			"name" : "pkgcfg_lib_GTK3_pango-1.0",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/msys64/mingw64/lib/libpango-1.0.dll.a"
+		},
+		{
+			"name" : "pkgcfg_lib_GTK3_pangocairo-1.0",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/msys64/mingw64/lib/libpangocairo-1.0.dll.a"
+		},
+		{
+			"name" : "pkgcfg_lib_GTK3_pangowin32-1.0",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/msys64/mingw64/lib/libpangowin32-1.0.dll.a"
+		},
+		{
+			"name" : "pkgcfg_lib_GTK3_setupapi",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "pkgcfg_lib_GTK3_setupapi-NOTFOUND"
+		},
+		{
+			"name" : "pkgcfg_lib_GTK3_shell32",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "pkgcfg_lib_GTK3_shell32-NOTFOUND"
+		},
+		{
+			"name" : "pkgcfg_lib_GTK3_uuid",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "pkgcfg_lib_GTK3_uuid-NOTFOUND"
+		},
+		{
+			"name" : "pkgcfg_lib_GTK3_winmm",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "pkgcfg_lib_GTK3_winmm-NOTFOUND"
+		},
+		{
+			"name" : "pkgcfg_lib_GTK3_winspool",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "pkgcfg_lib_GTK3_winspool-NOTFOUND"
+		},
+		{
+			"name" : "pkgcfg_lib_GTK3_z",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/msys64/mingw64/lib/libz.dll.a"
+		},
+		{
+			"name" : "prefix_result",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "C:/msys64/mingw64/lib"
 		}
 	],
 	"kind" : "cache",
