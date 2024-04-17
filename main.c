@@ -89,7 +89,7 @@ int main() {
                         deck = newDeck;
                         clearTable(table);
                         dealToStartTable(deck, table);
-                        setShowAllCards(table, true);
+                        setShowAllCards(table, false);
                         printTable(table, command);
                     }
 
@@ -99,7 +99,7 @@ int main() {
                         deck = newDeck;
                         clearTable(table);
                         dealToStartTable(deck, table);
-                        setShowAllCards(table, true);
+                        setShowAllCards(table, false);
                         printTable(table, command);
                     }
 

@@ -187,19 +187,36 @@ void dealToGameTable(Table* table, Deck* deck) {
 
 void clearTable(Table *table) {
     if (table == NULL) {
-        return; // In case the table has not been initialized
+        return;
     }
 
-    for (int i = 0; i < 11; i++) { // Assuming there are 11 columns including foundations
+    for (int i = 0; i < 11; i++) {
         Node *current = table->columns[i]->next;
-        while (current != table->columns[i]) { // Loop until the dummy node is encountered
+        while (current != table->columns[i]) {
             Node *temp = current;
             current = current->next;
-            free(temp); // Free each node except the dummy
+            free(temp);
         }
-        // Reset the dummy nodes to point to themselves
         table->columns[i]->next = table->columns[i];
         table->columns[i]->prev = table->columns[i];
     }
 }
+void moves(Table* table, char command[256]){
+    Node* colFrom = table->columns[command[1] - 1];
+    Node* colTo = table->columns[command[8] - 1];
+    char cardValueFrom = command[3];
+    char cardSuitFrom = command[4];
+    char cardSuitTo = colTo->prev->card.suit;
+    char cardValueTo = colTo->prev->card.value;
 
+    Node* current = colFrom->next;
+
+    while(current != colFrom && cardValueFrom != current->card.value && cardSuitFrom != current->card.suit){
+        current = current->next;
+    }
+
+
+}
+int convertValue(char value){
+
+}
