@@ -3,6 +3,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Yukon.dir/deck.c.obj.d"
   "CMakeFiles/Yukon.dir/file.c.obj"
   "CMakeFiles/Yukon.dir/file.c.obj.d"
+  "CMakeFiles/Yukon.dir/gui.c.obj"
+  "CMakeFiles/Yukon.dir/gui.c.obj.d"
   "CMakeFiles/Yukon.dir/main.c.obj"
   "CMakeFiles/Yukon.dir/main.c.obj.d"
   "CMakeFiles/Yukon.dir/shuffle.c.obj"

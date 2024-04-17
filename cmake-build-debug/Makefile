@@ -176,6 +176,30 @@ file.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Yukon.dir\build.make CMakeFiles/Yukon.dir/file.c.s
 .PHONY : file.c.s
 
+gui.obj: gui.c.obj
+.PHONY : gui.obj
+
+# target to build an object file
+gui.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Yukon.dir\build.make CMakeFiles/Yukon.dir/gui.c.obj
+.PHONY : gui.c.obj
+
+gui.i: gui.c.i
+.PHONY : gui.i
+
+# target to preprocess a source file
+gui.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Yukon.dir\build.make CMakeFiles/Yukon.dir/gui.c.i
+.PHONY : gui.c.i
+
+gui.s: gui.c.s
+.PHONY : gui.s
+
+# target to generate assembly for a file
+gui.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Yukon.dir\build.make CMakeFiles/Yukon.dir/gui.c.s
+.PHONY : gui.c.s
+
 main.obj: main.c.obj
 .PHONY : main.obj
 
@@ -263,6 +287,9 @@ help:
 	@echo ... file.obj
 	@echo ... file.i
 	@echo ... file.s
+	@echo ... gui.obj
+	@echo ... gui.i
+	@echo ... gui.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

@@ -7,6 +7,8 @@
 #include "file.h"
 #include "shuffle.h"
 #include "table.h"
+#include <gtk/gtk.h>
+#include "gui.c"
 
 void printStartupScreen();
 void initializeDeck(Deck *deck);
@@ -22,7 +24,7 @@ void dealToGameTable(Table* table, Deck* deck);
 void clearTable(Table *table);
 
 
-int main() {
+int main(int argc, char **argv) {
     srand(time(NULL));
     Deck *deck = malloc(sizeof(Deck));
     Table *table = initializeTable();
@@ -30,6 +32,23 @@ int main() {
         fprintf(stderr, "Failed to allocate memory for deck or tableau.\n");
         exit(EXIT_FAILURE);
     }
+
+    //her kommer gui-logikken på spil:
+    GtkApplication *app;
+    int status;
+
+    // Opret en ny GtkApplication
+    app = gtk_application_new("org.example.yukon", G_APPLICATION_DEFAULT_FLAGS);
+    g_signal_connect(app, "activate", G_CALLBACK(activate), NULL);
+
+    // Kør applikationen og afregistrer
+    status = g_application_run(G_APPLICATION(app), argc, argv);
+    g_object_unref(app);
+
+    return status;
+
+
+
 
     printStartupScreen();
 

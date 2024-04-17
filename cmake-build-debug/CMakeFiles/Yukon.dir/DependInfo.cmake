@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/deck.c" "CMakeFiles/Yukon.dir/deck.c.obj" "gcc" "CMakeFiles/Yukon.dir/deck.c.obj.d"
   "C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/file.c" "CMakeFiles/Yukon.dir/file.c.obj" "gcc" "CMakeFiles/Yukon.dir/file.c.obj.d"
+  "C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/gui.c" "CMakeFiles/Yukon.dir/gui.c.obj" "gcc" "CMakeFiles/Yukon.dir/gui.c.obj.d"
   "C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/main.c" "CMakeFiles/Yukon.dir/main.c.obj" "gcc" "CMakeFiles/Yukon.dir/main.c.obj.d"
   "C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/shuffle.c" "CMakeFiles/Yukon.dir/shuffle.c.obj" "gcc" "CMakeFiles/Yukon.dir/shuffle.c.obj.d"
   "C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/table.c" "CMakeFiles/Yukon.dir/table.c.obj" "gcc" "CMakeFiles/Yukon.dir/table.c.obj.d"

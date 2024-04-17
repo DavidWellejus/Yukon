@@ -23,6 +23,8 @@ add_executable(Yukon main.c
         shuffle.h
         table.c
         table.h
+        gui.c
+        gui.h
 )
 
 target_link_libraries(Yukon ${GTK3_LIBRARIES})
