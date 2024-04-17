@@ -202,21 +202,54 @@ void clearTable(Table *table) {
     }
 }
 void moves(Table* table, char command[256]){
-    Node* colFrom = table->columns[command[1] - 1];
-    Node* colTo = table->columns[command[8] - 1];
+    Node* colFrom = table->columns[convertValue(command[1]) - 1];
+    Node* colTo = table->columns[convertValue(command[8]) - 1];
     char cardValueFrom = command[3];
     char cardSuitFrom = command[4];
     char cardSuitTo = colTo->prev->card.suit;
     char cardValueTo = colTo->prev->card.value;
+    int currentValueInt;
+    int cardValueToInt;
 
     Node* current = colFrom->next;
 
-    while(current != colFrom && cardValueFrom != current->card.value && cardSuitFrom != current->card.suit){
+    while(current != colFrom && cardValueFrom != current->card.value || cardSuitFrom != current->card.suit){
         current = current->next;
     }
+    Node* lastCardInCol = current->next;
+    while (!lastCardInCol->next->isDummy){
+        lastCardInCol = lastCardInCol->next;
+    }
 
+    if(!current->isDummy){
+        currentValueInt = convertValue(current->card.value);
+        cardValueToInt = convertValue(cardValueTo);
 
+        if(cardSuitFrom != cardSuitTo && cardValueToInt > currentValueInt){
+            current->prev->next = colFrom;
+            colFrom->prev = current->prev;
+
+            lastCardInCol->next = colTo;
+            current->prev = colTo->prev;
+            colTo->prev->next = current;
+            current->next->prev = current;
+            colTo->prev = current;
+        }
+    }
 }
-int convertValue(char value){
-
+int convertValue(char value) {
+    switch (value) {
+        case 'A':
+            return 1;
+        case 'K':
+            return 13;
+        case 'Q':
+            return 12;
+        case 'J':
+            return 11;
+        case 'T':
+            return 10;
+        default:
+            return value - '0';
+    }
 }
