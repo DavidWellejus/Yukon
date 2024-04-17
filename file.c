@@ -8,11 +8,8 @@
 #include "deck.h"
 
 bool saveDeckToFile(const Deck *deck, const char *filename) {
-    FILE *file = fopen(filename, "w");
-    if (!file) {
-        fprintf(stderr, "Error: Unable to open file %s for writing.\n", filename);
-        return false;
-    }
+    FILE *file = fopen(filename, "r");
+    if (!file) return false;
 
     Node *current = deck->top->next; // Starter med det første faktiske kort
     while (current != NULL && !current->isDummy) { // Tjekker for dummy-node
@@ -26,7 +23,6 @@ bool saveDeckToFile(const Deck *deck, const char *filename) {
 Deck* loadDeckFromFile(const char *filename) {
     FILE *file = fopen(filename, "r");
     if (!file) {
-        fprintf(stderr, "Error: Unable to open file %s.\n", filename);
         return NULL;
     }
 

@@ -53,8 +53,9 @@ int main() {
             if (strcmp(command, "LD") == 0) {
                 if (sscanf(inputLine, "%*s %s", fileName) == 1) {
 
-                    if (!loadDeckFromFile(fileName)) {
+                    if (loadDeckFromFile(fileName) == NULL) {
                         strcpy(message, "Error: Invalid file or unable to load deck.");
+                        printTable(table, command, message);
                     } else {
                         deck = loadDeckFromFile(fileName);
                         clearTable(table);
@@ -102,11 +103,18 @@ int main() {
 
             else if(strcmp(command, "SD") == 0){
                 if (sscanf(inputLine, "%*s %s", fileName) == 1) {
-                    saveDeckToFile(deck, fileName);
-                    printTable(table, command, message);
+                    if(!saveDeckToFile(deck, fileName)){
+                        strcpy(message, "Error: Unable to open file for writing.");
+                        printTable(table, command, message);
+                    }
+                    else{
+                        saveDeckToFile(deck, fileName);
+                        printTable(table, command, message);
+                    }
+
                 }
                 else {
-                    saveDeckToFile(deck, "C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/cards.txt");
+                    saveDeckToFile(deck, "C:/Users/klavs/OneDrive/Skrivebord/DTU/2.Semester/Maskiner programering/Yukon/cards.txt");
                     printTable(table, command, message);
                 }
             }
