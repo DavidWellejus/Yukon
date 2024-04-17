@@ -65,7 +65,7 @@ void dealToStartTable(Deck *deck, Table *table) {
 }
 
 
-void printTable(Table *table, char lastCommand[256], char message[256]) {
+void printTable(Table* table, char lastCommand[256], char message[256]) {
     if (table == NULL) {
         return;
     }
@@ -78,7 +78,7 @@ void printTable(Table *table, char lastCommand[256], char message[256]) {
     do {
         allColumnsDone = true;
         for (int col = 0; col < 7; col++) {
-            Node *currentNode = table->columns[col]->next;
+            Node* currentNode = table->columns[col]->next;
 
             for (int depth = 0; depth < row && currentNode != table->columns[col]; depth++) {
                 currentNode = currentNode->next;
@@ -111,8 +111,24 @@ void printTable(Table *table, char lastCommand[256], char message[256]) {
         printf("\n");
         row++;
     } while (!allColumnsDone);
-
-    printf("\nLAST Command: %s\nMessage: %s \n", lastCommand, message);
+    if(row < 8){
+        while(i < 4){
+            if (row % 2 == 0) {
+                Node *foundationNode = table->columns[7 + row / 2]->next;
+                if (!foundationNode->isDummy) {
+                    printf("\t\t\t\t\t\t\t\t [%c%c] F%d\n", foundationNode->card.value, foundationNode->card.suit, 1 + row / 2);
+                } else {
+                    printf("\t\t\t\t\t\t\t\t [ ] F%d\n", 1 + row / 2);
+                }
+                i++;
+                row++;
+            } else {
+                printf("\n");
+                row++;
+            }
+        }
+    }
+    printf("\nLAST Command: %s\nMessage: %s\n", lastCommand, message);
 }
 
 
