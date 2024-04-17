@@ -14,7 +14,7 @@ bool saveDeckToFile(const Deck *deck, const char *filename);
 Deck* shuffleDeck(Deck* deck);
 Deck* loadDeckFromFile(const char *filename);
 void dealToStartTable(Deck *deck, Table *table);
-void printTable(Table *table, char lastCommand[256]);
+void printTable(Table *table, char lastCommand[256], char message[256]);
 void setShowAllCards(Table *table, bool isVisible);
 Deck* splitter(Deck* deck, int split);
 void printDeck(Deck* deck);
@@ -39,6 +39,7 @@ int main() {
 
 
     while (true) {
+        char message[256] = "OK";
         printf("INPUT > ");
         fflush(stdout);
 
@@ -53,31 +54,31 @@ int main() {
                 if (sscanf(inputLine, "%*s %s", fileName) == 1) {
 
                     if (!loadDeckFromFile(fileName)) {
-                        printf("Error: Invalid file or unable to load deck.\n");
+                        strcpy(message, "Error: Invalid file or unable to load deck.");
                     } else {
                         deck = loadDeckFromFile(fileName);
                         clearTable(table);
                         dealToStartTable(deck, table);
-                        printTable(table, command);
+                        printTable(table, command, message);
                     }
                 }
                 else {
-                    deck = loadDeckFromFile("C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/Deck.txt");
+                    deck = loadDeckFromFile("C:/Users/klavs/OneDrive/Skrivebord/DTU/2.Semester/Maskiner programering/Yukon/Deck.txt");
                     clearTable(table);
                     dealToStartTable(deck, table);
-                    printTable(table, command);
+                    printTable(table, command, message);
                 }
             }
             else if (strcmp(command, "SW") == 0) {
                 setShowAllCards(table, true);
-                printTable(table, command);
+                printTable(table, command, message);
             }
 
             else if (strcmp(command, "SI") == 0) {
                 int split;
                 if (sscanf(inputLine, "%*s %d", &split) == 1) {
                     split = rand() % (deck->size - 1) + 1;
-                    printf("Using random split: %d\n", split);
+                    strcpy(message,"Using random split.");
 
                 }
                 Deck* newDeck = splitter(deck, split);
@@ -86,7 +87,7 @@ int main() {
                 clearTable(table);
                 dealToStartTable(deck, table);
                 setShowAllCards(table, true);
-                printTable(table, command);
+                printTable(table, command, message);
             }
 
             else if(strcmp(command, "SR") == 0){
@@ -96,31 +97,31 @@ int main() {
                 clearTable(table);
                 dealToStartTable(deck, table);
                 setShowAllCards(table, true);
-                printTable(table, command);
+                printTable(table, command, message);
             }
 
             else if(strcmp(command, "SD") == 0){
                 if (sscanf(inputLine, "%*s %s", fileName) == 1) {
                     saveDeckToFile(deck, fileName);
-                    printTable(table, command);
+                    printTable(table, command, message);
                 }
                 else {
                     saveDeckToFile(deck, "C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/cards.txt");
-                    printTable(table, command);
+                    printTable(table, command, message);
                 }
             }
             else if(strcmp(command, "P") == 0){
                 clearTable(table);
                 dealToGameTable(table, deck);
-                printTable(table, command);
+                printTable(table, command, message);
             }
             else if (strcmp(command, "QQ") == 0) {
                 break;
             } else {
-                printf("Unknown command.\n");
+                strcpy(message,"Unknown command.\n");
             }
         } else {
-            printf("Error: No command entered.\n");
+            strcpy(message,"Error: No command entered.\n");
         }
     }
 
