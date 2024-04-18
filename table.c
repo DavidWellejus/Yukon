@@ -117,7 +117,7 @@ void printTable(Table *table, char lastCommand[256]) {
             if (row % 2 == 0) {
                 Node *foundationNode = table->columns[7 + row / 2]->next;
                 if (!foundationNode->isDummy) {
-                    printf("\t\t\t\t\t\t\t\t [%c%c] F%d\n", foundationNode->card.value, foundationNode->card.suit, 1 + row / 2);
+                    printf("\t\t\t\t\t\t\t\t %c%c F%d\n", foundationNode->card.value, foundationNode->card.suit, 1 + row / 2);
                 } else {
                     printf("\t\t\t\t\t\t\t\t [ ] F%d\n", 1 + row / 2);
                 }
@@ -202,8 +202,20 @@ void clearTable(Table *table) {
     }
 }
 void moves(Table* table, char command[256]){
-    Node* colFrom = table->columns[convertValue(command[1]) - 1];
-    Node* colTo = table->columns[convertValue(command[8]) - 1];
+    Node* colFrom;
+    if(command[0] == 'F'){
+        colFrom = table->columns[convertValue(command[1]) + 6];
+    } else {
+        colFrom = table->columns[convertValue(command[1]) - 1];
+    }
+
+    Node* colTo;
+    if(command[7] == 'F'){
+        colTo = table->columns[convertValue(command[8]) + 6];
+    } else{
+        colTo = table->columns[convertValue(command[8]) - 1];
+    }
+
     char cardValueFrom = command[3];
     char cardSuitFrom = command[4];
     char cardSuitTo = colTo->prev->card.suit;
@@ -224,6 +236,19 @@ void moves(Table* table, char command[256]){
     if(!current->isDummy){
         currentValueInt = convertValue(current->card.value);
         cardValueToInt = convertValue(cardValueTo);
+
+        if(command[7] == 'F'){
+            if(cardSuitFrom == cardSuitTo || colTo->isDummy && cardValueToInt < currentValueInt){
+                current->prev->next = colFrom;
+                colFrom->prev = current->prev;
+
+                lastCardInCol->next = colTo;
+                current->prev = colTo->prev;
+                colTo->prev->next = current;
+                current->next->prev = current;
+                colTo->prev = current;
+            }
+        }
 
         if(cardSuitFrom != cardSuitTo && cardValueToInt > currentValueInt){
             current->prev->next = colFrom;

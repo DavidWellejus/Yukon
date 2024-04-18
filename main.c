@@ -126,17 +126,14 @@ int main() {
 
                 char sourceCol, destCol;
                 int sourceColNum, destColNum;
-                char cardValue[3];  // Array til at håndtere kortværdier som "10"
+                char cardValue[3];
                 char cardSuit;
 
-// Tjekker om input følger mønsteret 'C2:7D->C5' hvor 2 og 5 kan variere
+
                 int count = sscanf(inputLine, "%c%d:%2s->%c%d", &sourceCol, &sourceColNum, cardValue, &destCol, &destColNum);
 
                 if (count == 5) {
-                    // Nu har du uddraget alle nødvendige informationer
-                    // Funktionen til at udføre flytning kan kaldes her
-                    printf("Flyt fra kolonne %d til kolonne %d kortet %s\n", sourceColNum, destColNum, cardValue);
-                    moves(table, inputLine);  // Antager at 'moves' kan håndtere hele strengen
+                    moves(table, inputLine);
                     printTable(table, command);
                 } else {
                     printf("Invalid input format.\n");
