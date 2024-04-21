@@ -50,6 +50,8 @@ int main(int argc, char **argv) {
 
 
 
+
+
     printStartupScreen();
 
     char inputLine[256];
