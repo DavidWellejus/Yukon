@@ -21,6 +21,7 @@ void printDeck(Deck* deck);
 void dealToGameTable(Table* table, Deck* deck);
 void clearTable(Table *table);
 void moves(Table* table, char command[256]);
+void movesCol(Table* table, char command[256]);
 
 
 int main() {
@@ -135,10 +136,15 @@ int main() {
                 if (count == 5) {
                     moves(table, inputLine);
                     printTable(table, command);
-                } else {
-                    printf("Invalid input format.\n");
                 }
-
+                else {
+                    count = sscanf(inputLine, "%c%d->%c%d", &sourceCol, &sourceColNum, &destCol, &destColNum);
+                    if (count == 4) {
+                        movesCol(table, inputLine);
+                        printTable(table, inputLine);
+                        continue;
+                    }
+                }
             }
         } else {
             printf("Error: No command entered.\n");

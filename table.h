@@ -15,5 +15,6 @@ void dealToGameTable(Table* table, Deck* deck);
 void clearTable(Table *table);
 void moves(Table* table, char command[256]);
 int convertValue(char value);
+void movesCol(Table* table, char command[256]);
 
 #endif //YUKON_TABLE_H

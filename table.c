@@ -99,7 +99,7 @@ void printTable(Table *table, char lastCommand[256]) {
         if (row % 2 == 0 && i < 4) {
             Node *foundationNode = table->columns[7 + row / 2]->next;
             if (!foundationNode->isDummy) {
-                printf("\t [%c%c] F%d\t", foundationNode->card.value, foundationNode->card.suit, 1 + row / 2);
+                printf("\t %c%c F%d\t", foundationNode->card.value, foundationNode->card.suit, 1 + row / 2);
             } else {
                 printf("\t [ ] F%d\t", 1 + row / 2);
             }
@@ -229,8 +229,10 @@ void moves(Table* table, char command[256]){
         current = current->next;
     }
     Node* lastCardInCol = current->next;
+    int t = 0;
     while (!lastCardInCol->next->isDummy){
         lastCardInCol = lastCardInCol->next;
+        t++;
     }
 
     if(!current->isDummy){
@@ -238,19 +240,19 @@ void moves(Table* table, char command[256]){
         cardValueToInt = convertValue(cardValueTo);
 
         if(command[7] == 'F'){
-            if(cardSuitFrom == cardSuitTo || colTo->isDummy && cardValueToInt < currentValueInt){
+            if(cardSuitFrom == cardSuitTo || colTo->isDummy && cardValueToInt + 48 == currentValueInt - 1 && current == lastCardInCol){
                 current->prev->next = colFrom;
                 colFrom->prev = current->prev;
 
-                lastCardInCol->next = colTo;
-                current->prev = colTo->prev;
-                colTo->prev->next = current;
-                current->next->prev = current;
-                colTo->prev = current;
+                Node* topCard = colTo->next;
+                colTo->next = current;
+                current->prev = colTo;
+                current->next = topCard;
+                topCard->prev = current;
             }
         }
 
-        if(cardSuitFrom != cardSuitTo && cardValueToInt > currentValueInt){
+        if(cardSuitFrom != cardSuitTo && cardValueToInt > currentValueInt || cardValueToInt + 48 == 0 && currentValueInt == 13){
             current->prev->next = colFrom;
             colFrom->prev = current->prev;
 
@@ -261,7 +263,71 @@ void moves(Table* table, char command[256]){
             colTo->prev = current;
         }
     }
+    if(!colFrom->prev->card.isVisible){
+        colFrom->prev->card.isVisible = true;
+    }
 }
+
+void movesCol(Table* table, char command[256]){
+
+    char cardSuitTo;
+    char cardSuitFrom;
+    int cardValueTo;
+    int cardValueFrom;
+    Node* current;
+
+    Node* colFrom;
+    if(command[0] == 'F'){
+        colFrom = table->columns[convertValue(command[1]) + 6];
+    } else {
+        colFrom = table->columns[convertValue(command[1]) - 1];
+    }
+
+
+    Node* colTo;
+    if(command[4] == 'F'){
+        colTo = table->columns[convertValue(command[5]) + 6];
+    } else{
+        colTo = table->columns[convertValue(command[5]) - 1];
+    }
+
+    cardSuitTo = colTo->prev->card.suit;
+    cardSuitFrom = colFrom->prev->card.suit;
+    cardValueTo = convertValue(colTo->prev->card.value);
+    cardValueFrom = convertValue(colFrom->prev->card.value);
+    current = colFrom->prev;
+
+
+
+    if(command[4] == 'F'){
+        if(cardSuitFrom == cardSuitTo && cardValueTo + 48 == cardValueFrom - 1  || colTo->isDummy){
+            current->prev->next = colFrom;
+            colFrom->prev = current->prev;
+
+            Node* topCard = colTo->next;
+            colTo->next = current;
+            current->prev = colTo;
+            current->next = topCard;
+            topCard->prev = current;
+        }
+    }
+
+    if(cardSuitFrom != cardSuitTo && cardValueTo > cardValueFrom || cardValueTo + 48 == 0 && cardValueFrom == 13){
+        current->prev->next = colFrom;
+        colFrom->prev = current->prev;
+
+        current->next = colTo;
+        current->prev = colTo->prev;
+        colTo->prev->next = current;
+        current->next->prev = current;
+        colTo->prev = current;
+    }
+    if(!colFrom->prev->card.isVisible){
+        colFrom->prev->card.isVisible = true;
+    }
+}
+
+
 int convertValue(char value) {
     switch (value) {
         case 'A':
