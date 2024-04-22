@@ -77,6 +77,7 @@ static void activate(GtkApplication *app, gpointer user_data) {
     button = gtk_button_new_with_label("LD");
     g_signal_connect(button, "clicked", G_CALLBACK(on_button_clicked), appData);
 
+
     //Her indsættes knappen i gridedet:
     gtk_grid_attach(GTK_GRID(grid), button, 0, 0, 1, 1);
 
