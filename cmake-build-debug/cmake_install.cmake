@@ -1,4 +1,4 @@
-# Install script for directory: C:/DTU/2.Semester/02322MaskinaerProgrammering/Lab/project2_machine/Yukon
+# Install script for directory: C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/DTU/2.Semester/02322MaskinaerProgrammering/Lab/project2_machine/Yukon/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
