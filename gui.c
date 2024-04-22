@@ -24,7 +24,7 @@
 //dealToStartTable(deck, table);
 //  printTable(table, command);
 
-//Den nye un_button_clicked:
+//Callback funktionen til LD knappen:
 static void on_button_clicked(GtkWidget *widget, gpointer data) {
     g_print("LD-knappen blev trykket!\n");
 
@@ -50,11 +50,32 @@ static void on_button_clicked(GtkWidget *widget, gpointer data) {
     printTable(appData->table, "LD");
 }
 
+//Callback funktionen til SW knappen:
+// Tilføj denne nye funktion i gui.c
+static void on_button_sw_clicked(GtkWidget *widget, gpointer data) {
+    ApplicationData *appData = (ApplicationData *)data;
+    if (appData == NULL) {
+        g_print("Applikationsdata er ikke tilgængelig\n");
+        return;
+    }
+    if (appData->table == NULL) {
+        g_print("Table data er ikke tilgængelig\n");
+        return;
+    }
+
+    // Sæt alle kort til at være synlige
+    setShowAllCards(appData->table, true);
+
+    // Opdater bordvisningen (antag at printTable er tilpasset til at håndtere 'SW' som command)
+    printTable(appData->table, "SW");
+}
+
 
 static void activate(GtkApplication *app, gpointer user_data) {
     GtkWidget *window;
     GtkWidget *grid;
     GtkWidget *button;
+    GtkWidget *buttonSW;
 
     //Her starter den nye kode:
     ApplicationData *appData = g_new0(ApplicationData, 1);
@@ -76,6 +97,17 @@ static void activate(GtkApplication *app, gpointer user_data) {
     //Her oprettes knappen:
     button = gtk_button_new_with_label("LD");
     g_signal_connect(button, "clicked", G_CALLBACK(on_button_clicked), appData);
+
+    //Knappen til SW:
+
+    //Først oprettes en knap med tilhørende tekst PÅ knappen:
+    buttonSW = gtk_button_new_with_label("SW");
+
+    //Derefter hvilken funktion der skal køre når man trykker på knappen:
+    g_signal_connect(buttonSW, "clicked", G_CALLBACK(on_button_sw_clicked), appData);
+
+    //Deretfer knappens placering, højde og bredde i "gitteret"
+    gtk_grid_attach(GTK_GRID(grid), buttonSW, 1, 0, 1, 1);
 
 
     //Her indsættes knappen i gridedet:
