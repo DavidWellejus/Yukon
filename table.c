@@ -65,7 +65,7 @@ void dealToStartTable(Deck *deck, Table *table) {
 }
 
 
-void printTable(Table *table, char lastCommand[256]) {
+void printTable(Table *table, char lastCommand[256], char message[256]) {
     if (table == NULL) {
         return;
     }
@@ -129,7 +129,7 @@ void printTable(Table *table, char lastCommand[256]) {
             }
         }
     }
-    printf("\nLAST Command: %s\nMessage: \n", lastCommand);
+    printf("\nLAST Command: %s\nMessage: %s\n", lastCommand, message);
 }
 
 
