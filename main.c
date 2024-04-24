@@ -22,6 +22,7 @@ void dealToGameTable(Table* table, Deck* deck);
 void clearTable(Table *table);
 void moves(Table* table, char command[256]);
 void movesCol(Table* table, char command[256]);
+void stripNewline(char *str);
 
 
 int main() {
@@ -51,10 +52,15 @@ int main() {
             printf("Error reading input.\n");
             continue;
         }
+        stripNewline(inputLine);
 
 
         if (sscanf(inputLine, "%s", command) == 1) {
 
+            if(t == 1 && strcmp(command, "LD") == 0 || strcmp(command, "SI") == 0 || strcmp(command, "SR") == 0 || strcmp(command, "SD") == 0 || strcmp(command, "QQ") == 0){
+                strcpy(message, "Command not available in the PLAY phase.");
+                printTable(table, command, message);
+            }
             if (t == 0) {
                 if (strcmp(command, "LD") == 0) {
                     if (sscanf(inputLine, "%*s %s", fileName) == 1) {
@@ -184,4 +190,11 @@ int main() {
         free(table);
 
         return 0;
+}
+
+void stripNewline(char *str) {
+    int len = strlen(str);
+    if (len > 0 && str[len - 1] == '\n') {
+        str[len - 1] = '\0';  // Erstat '\n' med null-terminator
+    }
 }
