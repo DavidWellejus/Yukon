@@ -260,14 +260,14 @@ bool moves(Table* table, char command[256]){
             current->prev = colTo->prev;
             colTo->prev->next = current;
             current->next->prev = current;
-            colTo->prev = current;
+            colTo->prev = lastCardInCol;
             moveMade = true;
         }
     }
     if(!colFrom->prev->card.isVisible){
         colFrom->prev->card.isVisible = true;
     }
-    return moveMade; // Return whether a move was made or not
+    return moveMade;
 }
 
 
@@ -329,7 +329,7 @@ bool movesCol(Table* table, char command[256]){
         colFrom->prev->card.isVisible = true;
     }
 
-    return moveMade; // Return whether a move was made or not
+    return moveMade;
 }
 
 
