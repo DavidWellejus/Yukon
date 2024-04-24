@@ -7,13 +7,15 @@
 #include "shuffle.h"
 #include "table.h"
 
+char message[256]="OK";
+
 
 
 
 
 //Her kommer callback funktionerne til de forskellige knapper:
 //Callback funktionen til LD knappen:
-static void on_button_clicked(GtkWidget *widget, gpointer data) {
+ void on_button_clicked(GtkWidget *widget, gpointer data) {
 
     // Sørger for at data pointeren er gyldig og castes til den korrekte type
     ApplicationData *appData = (ApplicationData *)data;
@@ -34,11 +36,11 @@ static void on_button_clicked(GtkWidget *widget, gpointer data) {
     dealToStartTable(appData->deck, appData->table);
 
     // Opdaterer bordvisningen
-    printTable(appData->table, "LD");
+    printTable(appData->table, "LD", message);
 }
 
 //Callback funktionen til SW knappen:
-static void on_button_sw_clicked(GtkWidget *widget, gpointer data) {
+ void on_button_sw_clicked(GtkWidget *widget, gpointer data) {
     ApplicationData *appData = (ApplicationData *)data;
     if (appData == NULL) {
         g_print("Applikationsdata er ikke tilgængelig\n");
@@ -53,11 +55,11 @@ static void on_button_sw_clicked(GtkWidget *widget, gpointer data) {
     setShowAllCards(appData->table, true);
 
     // Opdater bordvisningen (antag at printTable er tilpasset til at håndtere 'SW' som command)
-    printTable(appData->table, "SW");
+    printTable(appData->table, "SW", message);
 }
 
 //Callbackfunktion til SI-knappen:
-static void on_button_si_clicked(GtkWidget *widget, gpointer data) {
+ void on_button_si_clicked(GtkWidget *widget, gpointer data) {
     ApplicationData *appData = (ApplicationData *)data;
     if (appData == NULL || appData->deck == NULL) {
         g_print("Applikationsdata eller deck er ikke tilgængelig\n");
@@ -77,11 +79,11 @@ static void on_button_si_clicked(GtkWidget *widget, gpointer data) {
 
     clearTable(appData->table);  // Ryd bordet
     dealToStartTable(appData->deck, appData->table);  // Fordel kortene igen
-    printTable(appData->table, "SI");  // Vis bordet
+    printTable(appData->table, "SI", message);  // Vis bordet
 }
 
 // Callback funktionen til SR-knappen:
-static void on_button_sr_clicked(GtkWidget *widget, gpointer data) {
+ void on_button_sr_clicked(GtkWidget *widget, gpointer data) {
     ApplicationData *appData = (ApplicationData *)data;
     if (appData == NULL || appData->deck == NULL) {
         g_print("Applikationsdata eller deck er ikke tilgængelig\n");
@@ -100,12 +102,12 @@ static void on_button_sr_clicked(GtkWidget *widget, gpointer data) {
 
     clearTable(appData->table);  // Ryd bordet
     dealToStartTable(appData->deck, appData->table);  // Fordel kortene igen
-    printTable(appData->table, "SR");  // Vis bordet
+    printTable(appData->table, "SR", message);  // Vis bordet
 }
 
 
 
-static void activate(GtkApplication *app, gpointer user_data) {
+ void activate(GtkApplication *app, gpointer user_data) {
     GtkWidget *window;
     GtkWidget *grid;
     GtkWidget *button;

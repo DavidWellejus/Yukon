@@ -713,5 +713,5 @@ CMakeFiles/Yukon.dir/main.c.obj: \
  C:/msys64/mingw64/include/gtk-3.0/gtk/deprecated/gtkvscrollbar.h \
  C:/msys64/mingw64/include/gtk-3.0/gtk/deprecated/gtkvseparator.h \
  C:/msys64/mingw64/include/gtk-3.0/gtk/gtk-autocleanups.h \
- C:\DTU\2.Semester\02322MaskinaerProgrammering\lab\project2_machine\Yukon\gui.c \
- C:\DTU\2.Semester\02322MaskinaerProgrammering\lab\project2_machine\Yukon\gui.h
+ C:\DTU\2.Semester\02322MaskinaerProgrammering\lab\project2_machine\Yukon\gui.h \
+ C:\DTU\2.Semester\02322MaskinaerProgrammering\lab\project2_machine\Yukon\main.h

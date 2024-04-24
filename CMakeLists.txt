@@ -25,6 +25,7 @@ add_executable(Yukon main.c
         table.h
         gui.c
         gui.h
+        main.h
 )
 
 target_link_libraries(Yukon ${GTK3_LIBRARIES})

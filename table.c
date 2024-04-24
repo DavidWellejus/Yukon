@@ -65,7 +65,7 @@ void dealToStartTable(Deck *deck, Table *table) {
 }
 
 
-void printTable(Table *table, char lastCommand[256]) {
+void printTable(Table *table, char lastCommand[256], char message[256]) {
     if (table == NULL) {
         return;
     }
@@ -99,7 +99,7 @@ void printTable(Table *table, char lastCommand[256]) {
         if (row % 2 == 0 && i < 4) {
             Node *foundationNode = table->columns[7 + row / 2]->next;
             if (!foundationNode->isDummy) {
-                printf("\t [%c%c] F%d\t", foundationNode->card.value, foundationNode->card.suit, 1 + row / 2);
+                printf("\t %c%c F%d\t", foundationNode->card.value, foundationNode->card.suit, 1 + row / 2);
             } else {
                 printf("\t [ ] F%d\t", 1 + row / 2);
             }
@@ -112,7 +112,24 @@ void printTable(Table *table, char lastCommand[256]) {
         row++;
     } while (!allColumnsDone);
 
-    printf("\nLAST Command: %s\nMessage: \n", lastCommand);
+    if(row < 8){
+        while(i < 4){
+            if (row % 2 == 0) {
+                Node *foundationNode = table->columns[7 + row / 2]->next;
+                if (!foundationNode->isDummy) {
+                    printf("\t\t\t\t\t\t\t\t %c%c F%d\n", foundationNode->card.value, foundationNode->card.suit, 1 + row / 2);
+                } else {
+                    printf("\t\t\t\t\t\t\t\t [ ] F%d\n", 1 + row / 2);
+                }
+                i++;
+                row++;
+            } else {
+                printf("\n");
+                row++;
+            }
+        }
+    }
+    printf("\nLAST Command: %s\nMessage: %s\n", lastCommand, message);
 }
 
 
@@ -170,19 +187,166 @@ void dealToGameTable(Table* table, Deck* deck) {
 
 void clearTable(Table *table) {
     if (table == NULL) {
-        return; // In case the table has not been initialized
+        return;
     }
 
-    for (int i = 0; i < 11; i++) { // Assuming there are 11 columns including foundations
+    for (int i = 0; i < 11; i++) {
         Node *current = table->columns[i]->next;
-        while (current != table->columns[i]) { // Loop until the dummy node is encountered
+        while (current != table->columns[i]) {
             Node *temp = current;
             current = current->next;
-            free(temp); // Free each node except the dummy
+            free(temp);
         }
-        // Reset the dummy nodes to point to themselves
         table->columns[i]->next = table->columns[i];
         table->columns[i]->prev = table->columns[i];
     }
 }
+bool moves(Table* table, char command[256]){
+    Node* colFrom;
+    if(command[0] == 'F'){
+        colFrom = table->columns[convertValue(command[1]) + 6];
+    } else {
+        colFrom = table->columns[convertValue(command[1]) - 1];
+    }
 
+    Node* colTo;
+    if(command[7] == 'F'){
+        colTo = table->columns[convertValue(command[8]) + 6];
+    } else{
+        colTo = table->columns[convertValue(command[8]) - 1];
+    }
+
+    char cardValueFrom = command[3];
+    char cardSuitFrom = command[4];
+    char cardSuitTo = colTo->prev->card.suit;
+    char cardValueTo = colTo->prev->card.value;
+    int currentValueInt;
+    int cardValueToInt;
+    bool moveMade = false;
+
+    Node* current = colFrom->next;
+
+    while(current != colFrom && (cardValueFrom != current->card.value || cardSuitFrom != current->card.suit)){
+        current = current->next;
+    }
+    Node* lastCardInCol = current->next;
+    int t = 0;
+    while (!lastCardInCol->next->isDummy){
+        lastCardInCol = lastCardInCol->next;
+        t++;
+    }
+
+    if(!current->isDummy){
+        currentValueInt = convertValue(current->card.value);
+        cardValueToInt = convertValue(cardValueTo);
+
+        if(command[7] == 'F' && (cardSuitFrom == cardSuitTo || (colTo->isDummy && cardValueToInt + 48 == currentValueInt - 1 && current == lastCardInCol))){
+            current->prev->next = colFrom;
+            colFrom->prev = current->prev;
+
+            Node* topCard = colTo->next;
+            colTo->next = current;
+            current->prev = colTo;
+            current->next = topCard;
+            topCard->prev = current;
+            moveMade = true;
+        }
+
+        if(cardSuitFrom != cardSuitTo && cardValueToInt > currentValueInt || (cardValueToInt + 48 == 0 && currentValueInt == 13)){
+            current->prev->next = colFrom;
+            colFrom->prev = current->prev;
+
+            lastCardInCol->next = colTo;
+            current->prev = colTo->prev;
+            colTo->prev->next = current;
+            current->next->prev = current;
+            colTo->prev = current;
+            moveMade = true;
+        }
+    }
+    if(!colFrom->prev->card.isVisible){
+        colFrom->prev->card.isVisible = true;
+    }
+    return moveMade; // Return whether a move was made or not
+}
+
+
+bool movesCol(Table* table, char command[256]){
+    char cardSuitTo;
+    char cardSuitFrom;
+    int cardValueTo;
+    int cardValueFrom;
+    Node* current;
+
+    Node* colFrom;
+    if(command[0] == 'F'){
+        colFrom = table->columns[convertValue(command[1]) + 6];
+    } else {
+        colFrom = table->columns[convertValue(command[1]) - 1];
+    }
+
+    Node* colTo;
+    if(command[4] == 'F'){
+        colTo = table->columns[convertValue(command[5]) + 6];
+    } else{
+        colTo = table->columns[convertValue(command[5]) - 1];
+    }
+
+    cardSuitTo = colTo->prev->card.suit;
+    cardSuitFrom = colFrom->prev->card.suit;
+    cardValueTo = convertValue(colTo->prev->card.value);
+    cardValueFrom = convertValue(colFrom->prev->card.value);
+    current = colFrom->prev;
+    bool moveMade = false;
+
+    if(command[4] == 'F'){
+        if(cardSuitFrom == cardSuitTo && cardValueTo + 48 == cardValueFrom - 1 || colTo->isDummy){
+            current->prev->next = colFrom;
+            colFrom->prev = current->prev;
+
+            Node* topCard = colTo->next;
+            colTo->next = current;
+            current->prev = colTo;
+            current->next = topCard;
+            topCard->prev = current;
+            moveMade = true;
+        }
+    }
+
+    if(cardSuitFrom != cardSuitTo && cardValueTo > cardValueFrom || (cardValueTo + 48 == 0 && cardValueFrom == 13)){
+        current->prev->next = colFrom;
+        colFrom->prev = current->prev;
+
+        current->next = colTo;
+        current->prev = colTo->prev;
+        colTo->prev->next = current;
+        current->next->prev = current;
+        colTo->prev = current;
+        moveMade = true;
+    }
+
+    if(!colFrom->prev->card.isVisible){
+        colFrom->prev->card.isVisible = true;
+    }
+
+    return moveMade; // Return whether a move was made or not
+}
+
+
+
+int convertValue(char value) {
+    switch (value) {
+        case 'A':
+            return 1;
+        case 'K':
+            return 13;
+        case 'Q':
+            return 12;
+        case 'J':
+            return 11;
+        case 'T':
+            return 10;
+        default:
+            return value - '0';
+    }
+}

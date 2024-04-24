@@ -127,6 +127,9 @@
 		<Unit filename="C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/main.c">
 			<Option target="Yukon"/>
 		</Unit>
+		<Unit filename="C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/main.h">
+			<Option target="Yukon"/>
+		</Unit>
 		<Unit filename="C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/shuffle.c">
 			<Option target="Yukon"/>
 		</Unit>

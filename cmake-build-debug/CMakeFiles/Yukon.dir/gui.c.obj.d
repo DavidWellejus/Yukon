@@ -1,9 +1,6 @@
 CMakeFiles/Yukon.dir/gui.c.obj: \
  C:\DTU\2.Semester\02322MaskinaerProgrammering\lab\project2_machine\Yukon\gui.c \
  C:\DTU\2.Semester\02322MaskinaerProgrammering\lab\project2_machine\Yukon\gui.h \
- C:\DTU\2.Semester\02322MaskinaerProgrammering\lab\project2_machine\Yukon\deck.h \
- C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdbool.h \
- C:\DTU\2.Semester\02322MaskinaerProgrammering\lab\project2_machine\Yukon\table.h \
  C:/msys64/mingw64/include/gtk-3.0/gtk/gtk.h \
  C:/msys64/mingw64/include/gtk-3.0/gdk/gdk.h \
  C:/msys64/mingw64/include/gtk-3.0/gdk/gdkconfig.h \
@@ -712,5 +709,8 @@ CMakeFiles/Yukon.dir/gui.c.obj: \
  C:/msys64/mingw64/include/gtk-3.0/gtk/deprecated/gtkvscrollbar.h \
  C:/msys64/mingw64/include/gtk-3.0/gtk/deprecated/gtkvseparator.h \
  C:/msys64/mingw64/include/gtk-3.0/gtk/gtk-autocleanups.h \
+ C:\DTU\2.Semester\02322MaskinaerProgrammering\lab\project2_machine\Yukon\deck.h \
+ C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdbool.h \
  C:\DTU\2.Semester\02322MaskinaerProgrammering\lab\project2_machine\Yukon\file.h \
- C:\DTU\2.Semester\02322MaskinaerProgrammering\lab\project2_machine\Yukon\shuffle.h
+ C:\DTU\2.Semester\02322MaskinaerProgrammering\lab\project2_machine\Yukon\shuffle.h \
+ C:\DTU\2.Semester\02322MaskinaerProgrammering\lab\project2_machine\Yukon\table.h

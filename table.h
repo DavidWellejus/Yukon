@@ -9,9 +9,12 @@
 
 Table* initializeTable();
 void dealToStartTable(Deck *deck, Table *table);
-void printTable(Table *table, char lastCommand[256]);
+void printTable(Table *table, char lastCommand[256], char message[256]);
 void setShowAllCards(Table *table, bool isVisible);
 void dealToGameTable(Table* table, Deck* deck);
 void clearTable(Table *table);
+bool moves(Table* table, char command[256]);
+int convertValue(char value);
+bool movesCol(Table* table, char command[256]);
 
 #endif //YUKON_TABLE_H

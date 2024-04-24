@@ -8,15 +8,6 @@ CMake Deprecation Warning:
   use the cmake-file-api(7) to view CMake-generated project build trees.
 
 
--- The C compiler identification is GNU 13.1.0
--- Detecting C compiler ABI info
--- Detecting C compiler ABI info - done
--- Check for working C compiler: C:/Program Files/JetBrains/CLion 2023.3.4/bin/mingw/bin/gcc.exe - skipped
--- Detecting C compile features
--- Detecting C compile features - done
--- Found PkgConfig: C:/msys64/mingw64/bin/pkg-config.exe (found version "0.29.2") 
--- Checking for module 'gtk+-3.0'
---   Found gtk+-3.0, version 3.24.39
--- Configuring done (3.2s)
--- Generating done (0.0s)
+-- Configuring done (0.7s)
+-- Generating done (0.2s)
 -- Build files have been written to: C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/cmake-build-debug

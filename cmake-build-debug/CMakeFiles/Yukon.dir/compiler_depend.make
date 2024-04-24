@@ -1471,8 +1471,8 @@ CMakeFiles/Yukon.dir/main.c.obj: C:/DTU/2.Semester/02322MaskinaerProgrammering/l
   C:/msys64/mingw64/lib/glib-2.0/include/glibconfig.h \
   C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/deck.h \
   C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/file.h \
-  C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/gui.c \
   C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/gui.h \
+  C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/main.h \
   C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/shuffle.h \
   C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/table.h
 
@@ -2121,6 +2121,8 @@ C:/msys64/mingw64/include/glib-2.0/gobject/gsignal.h:
 C:/msys64/mingw64/include/glib-2.0/gio/gio-autocleanups.h:
 
 C:/msys64/mingw64/include/glib-2.0/gio/gio-visibility.h:
+
+C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/main.h:
 
 C:/msys64/mingw64/include/glib-2.0/gio/gio.h:
 
