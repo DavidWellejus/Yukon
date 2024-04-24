@@ -1,6 +1,4 @@
-//
-// Created by saleh on 17-04-2024.
-//
+
 
 #include "gui.h"
 #include <gtk/gtk.h>
@@ -11,22 +9,11 @@
 
 
 
-//Den opringdelige funktion som virker, men er udkommenteret i forsøg på at implementere funktion til knap:
-//funktion når knappen bliver klikket:
-//static void on_button_clicked(GtkWidget *widget, gpointer data) {
-   // g_print("Knap blev trykket!\n");
 
-//}
 
-//Her er "LD-funktionen" som vi vil aktivere når knappen biver trykket:
-// deck = loadDeckFromFile("C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/Deck.txt");
-// clearTable(table);
-//dealToStartTable(deck, table);
-//  printTable(table, command);
-
+//Her kommer callback funktionerne til de forskellige knapper:
 //Callback funktionen til LD knappen:
 static void on_button_clicked(GtkWidget *widget, gpointer data) {
-    g_print("LD-knappen blev trykket!\n");
 
     // Sørger for at data pointeren er gyldig og castes til den korrekte type
     ApplicationData *appData = (ApplicationData *)data;
@@ -51,7 +38,6 @@ static void on_button_clicked(GtkWidget *widget, gpointer data) {
 }
 
 //Callback funktionen til SW knappen:
-// Tilføj denne nye funktion i gui.c
 static void on_button_sw_clicked(GtkWidget *widget, gpointer data) {
     ApplicationData *appData = (ApplicationData *)data;
     if (appData == NULL) {
@@ -70,12 +56,73 @@ static void on_button_sw_clicked(GtkWidget *widget, gpointer data) {
     printTable(appData->table, "SW");
 }
 
+//Callbackfunktion til SI-knappen:
+static void on_button_si_clicked(GtkWidget *widget, gpointer data) {
+    ApplicationData *appData = (ApplicationData *)data;
+    if (appData == NULL || appData->deck == NULL) {
+        g_print("Applikationsdata eller deck er ikke tilgængelig\n");
+        return;
+    }
+
+    // Implementer logikken for at splitte deck
+    int splitPosition = rand() % (appData->deck->size - 1) + 1;  // Vælg en tilfældig split position
+    Deck *newDeck = splitter(appData->deck, splitPosition);
+    if (newDeck == NULL) {
+        g_print("Fejl ved splitting af deck\n");
+        return;
+    }
+
+    free(appData->deck);  // Frigiv det gamle deck
+    appData->deck = newDeck;  // Opdaterer med det nye splittede deck
+
+    clearTable(appData->table);  // Ryd bordet
+    dealToStartTable(appData->deck, appData->table);  // Fordel kortene igen
+    printTable(appData->table, "SI");  // Vis bordet
+}
+
+// Callback funktionen til SR-knappen:
+static void on_button_sr_clicked(GtkWidget *widget, gpointer data) {
+    ApplicationData *appData = (ApplicationData *)data;
+    if (appData == NULL || appData->deck == NULL) {
+        g_print("Applikationsdata eller deck er ikke tilgængelig\n");
+        return;
+    }
+
+    // Shuffle logik
+    Deck *shuffledDeck = shuffleDeck(appData->deck);
+    if (shuffledDeck == NULL) {
+        g_print("Fejl ved at blande deck\n");
+        return;
+    }
+
+    free(appData->deck);  // Frigiv det gamle deck hvis nødvendigt
+    appData->deck = shuffledDeck;  // Opdater med det nye shuffled deck
+
+    clearTable(appData->table);  // Ryd bordet
+    dealToStartTable(appData->deck, appData->table);  // Fordel kortene igen
+    printTable(appData->table, "SR");  // Vis bordet
+}
+
+
 
 static void activate(GtkApplication *app, gpointer user_data) {
     GtkWidget *window;
     GtkWidget *grid;
     GtkWidget *button;
     GtkWidget *buttonSW;
+    GtkWidget *buttonSI;
+    GtkWidget *buttonSR;
+
+    //Her kommer koden til den grønne baggrund:
+    // Opretter en CSS provider
+    GtkCssProvider *cssProvider = gtk_css_provider_new();
+    gtk_css_provider_load_from_data(cssProvider,
+                                    "window { background-color: green; }", -1, NULL);
+
+    // Tilføjer CSS provideren til alle widgets
+    gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
+                                              GTK_STYLE_PROVIDER(cssProvider),
+                                              GTK_STYLE_PROVIDER_PRIORITY_USER);
 
     //Her starter den nye kode:
     ApplicationData *appData = g_new0(ApplicationData, 1);
@@ -93,25 +140,37 @@ static void activate(GtkApplication *app, gpointer user_data) {
     grid = gtk_grid_new();
     gtk_container_add(GTK_CONTAINER(window), grid);
 
-    // Du kan tilføje flere GUI-komponenter her, f.eks. knapper, labels osv.
-    //Her oprettes knappen:
+    // Her tilføjes de forskellige knapper:
+
+    //Her oprettes LD-knappen:
+    //Først oprettes en knap med tilhørende tekst PÅ knappen:
     button = gtk_button_new_with_label("LD");
+
+    //Derefter hvilken funktion der skal kaldes når man trykker på knappen:
     g_signal_connect(button, "clicked", G_CALLBACK(on_button_clicked), appData);
 
-    //Knappen til SW:
-
-    //Først oprettes en knap med tilhørende tekst PÅ knappen:
-    buttonSW = gtk_button_new_with_label("SW");
-
-    //Derefter hvilken funktion der skal køre når man trykker på knappen:
-    g_signal_connect(buttonSW, "clicked", G_CALLBACK(on_button_sw_clicked), appData);
-
     //Deretfer knappens placering, højde og bredde i "gitteret"
+    gtk_grid_attach(GTK_GRID(grid), button, 0, 0, 1, 1);
+
+
+    //Her oprettes SW-knappen:
+    buttonSW = gtk_button_new_with_label("SW");
+    g_signal_connect(buttonSW, "clicked", G_CALLBACK(on_button_sw_clicked), appData);
     gtk_grid_attach(GTK_GRID(grid), buttonSW, 1, 0, 1, 1);
 
+    //Knappen til SI:
+    buttonSI = gtk_button_new_with_label("SI");
+    g_signal_connect(buttonSI, "clicked", G_CALLBACK(on_button_si_clicked), appData);  // Sætter callback funktionen for SI knappen
+    gtk_grid_attach(GTK_GRID(grid), buttonSI, 2, 0, 1, 1);
 
-    //Her indsættes knappen i gridedet:
-    gtk_grid_attach(GTK_GRID(grid), button, 0, 0, 1, 1);
+    //Knappen til SR:
+    buttonSR= gtk_button_new_with_label("SR");
+    g_signal_connect(buttonSR, "clicked", G_CALLBACK(on_button_sr_clicked), appData);
+    gtk_grid_attach(GTK_GRID(grid), buttonSR, 3, 0, 1, 1);
+
+
+
+
 
     gtk_widget_show_all(window);
 }
