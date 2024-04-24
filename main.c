@@ -20,8 +20,8 @@ Deck* splitter(Deck* deck, int split);
 void printDeck(Deck* deck);
 void dealToGameTable(Table* table, Deck* deck);
 void clearTable(Table *table);
-void moves(Table* table, char command[256]);
-void movesCol(Table* table, char command[256]);
+bool moves(Table* table, char command[256]);
+bool movesCol(Table* table, char command[256]);
 void stripNewline(char *str);
 
 
@@ -169,15 +169,18 @@ int main() {
                 int count = sscanf(inputLine, "%c%d:%2s->%c%d", &sourceCol, &sourceColNum, cardValue, &destCol, &destColNum);
 
                 if (count == 5) {
-                    moves(table, inputLine);
+                    if (!moves(table, inputLine)) {
+                        strcpy(message, "The move is not valid.");
+                    }
                     printTable(table, command, message);
                 }
                 else {
                     count = sscanf(inputLine, "%c%d->%c%d", &sourceCol, &sourceColNum, &destCol, &destColNum);
                     if (count == 4) {
-                        movesCol(table, inputLine);
+                        if (!movesCol(table, inputLine)) {
+                            strcpy(message, "The move is not valid.");
+                        }
                         printTable(table, inputLine, message);
-                        continue;
                     }
                 }
             }
@@ -195,6 +198,6 @@ int main() {
 void stripNewline(char *str) {
     int len = strlen(str);
     if (len > 0 && str[len - 1] == '\n') {
-        str[len - 1] = '\0';  // Erstat '\n' med null-terminator
+        str[len - 1] = '\0';
     }
 }
