@@ -1,10 +1,13 @@
-//
-// Created by saleh on 24-04-2024.
-//
+// main.h
 
 #ifndef YUKON_MAIN_H
 #define YUKON_MAIN_H
 
+#include <gtk/gtk.h>
+#include "deck.h"
+#include "table.h"
+
+// Deklaration af funktioner, der bruges i main.c og andre dele af programmet
 void printStartupScreen();
 void initializeDeck(Deck *deck);
 bool saveDeckToFile(const Deck *deck, const char *filename);
@@ -17,8 +20,6 @@ Deck* splitter(Deck* deck, int split);
 void printDeck(Deck* deck);
 void dealToGameTable(Table* table, Deck* deck);
 void clearTable(Table *table);
-bool moves(Table* table, char command[256]);
-bool movesCol(Table* table, char command[256]);
-void stripNewline(char *str);
+void cleanup(GApplication *app, gpointer user_data);
 
-#endif //YUKON_MAIN_H
+#endif // YUKON_MAIN_H
