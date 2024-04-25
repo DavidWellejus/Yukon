@@ -65,7 +65,7 @@ void dealToStartTable(Deck *deck, Table *table) {
 }
 
 
-void printTable(Table *table, char lastCommand[256]) {
+void printTable(Table *table, char lastCommand[256], char message[256]) {
     if (table == NULL) {
         return;
     }
@@ -129,7 +129,7 @@ void printTable(Table *table, char lastCommand[256]) {
             }
         }
     }
-    printf("\nLAST Command: %s\nMessage: \n", lastCommand);
+    printf("\nLAST Command: %s\nMessage: %s\n", lastCommand, message);
 }
 
 
@@ -201,7 +201,7 @@ void clearTable(Table *table) {
         table->columns[i]->prev = table->columns[i];
     }
 }
-void moves(Table* table, char command[256]){
+bool moves(Table* table, char command[256]){
     Node* colFrom;
     if(command[0] == 'F'){
         colFrom = table->columns[convertValue(command[1]) + 6];
@@ -222,10 +222,11 @@ void moves(Table* table, char command[256]){
     char cardValueTo = colTo->prev->card.value;
     int currentValueInt;
     int cardValueToInt;
+    bool moveMade = false;
 
     Node* current = colFrom->next;
 
-    while(current != colFrom && cardValueFrom != current->card.value || cardSuitFrom != current->card.suit){
+    while(current != colFrom && (cardValueFrom != current->card.value || cardSuitFrom != current->card.suit)){
         current = current->next;
     }
     Node* lastCardInCol = current->next;
@@ -239,20 +240,19 @@ void moves(Table* table, char command[256]){
         currentValueInt = convertValue(current->card.value);
         cardValueToInt = convertValue(cardValueTo);
 
-        if(command[7] == 'F'){
-            if(cardSuitFrom == cardSuitTo || colTo->isDummy && cardValueToInt + 48 == currentValueInt - 1 && current == lastCardInCol){
-                current->prev->next = colFrom;
-                colFrom->prev = current->prev;
+        if(command[7] == 'F' && (cardSuitFrom == cardSuitTo || (colTo->isDummy && cardValueToInt + 48 == currentValueInt - 1 && current == lastCardInCol))){
+            current->prev->next = colFrom;
+            colFrom->prev = current->prev;
 
-                Node* topCard = colTo->next;
-                colTo->next = current;
-                current->prev = colTo;
-                current->next = topCard;
-                topCard->prev = current;
-            }
+            Node* topCard = colTo->next;
+            colTo->next = current;
+            current->prev = colTo;
+            current->next = topCard;
+            topCard->prev = current;
+            moveMade = true;
         }
 
-        if(cardSuitFrom != cardSuitTo && cardValueToInt > currentValueInt || cardValueToInt + 48 == 0 && currentValueInt == 13){
+        if(cardSuitFrom != cardSuitTo && cardValueToInt > currentValueInt || (cardValueToInt + 48 == 0 && currentValueInt == 13)){
             current->prev->next = colFrom;
             colFrom->prev = current->prev;
 
@@ -260,16 +260,18 @@ void moves(Table* table, char command[256]){
             current->prev = colTo->prev;
             colTo->prev->next = current;
             current->next->prev = current;
-            colTo->prev = current;
+            colTo->prev = lastCardInCol;
+            moveMade = true;
         }
     }
     if(!colFrom->prev->card.isVisible){
         colFrom->prev->card.isVisible = true;
     }
+    return moveMade;
 }
 
-void movesCol(Table* table, char command[256]){
 
+bool movesCol(Table* table, char command[256]){
     char cardSuitTo;
     char cardSuitFrom;
     int cardValueTo;
@@ -283,7 +285,6 @@ void movesCol(Table* table, char command[256]){
         colFrom = table->columns[convertValue(command[1]) - 1];
     }
 
-
     Node* colTo;
     if(command[4] == 'F'){
         colTo = table->columns[convertValue(command[5]) + 6];
@@ -296,11 +297,10 @@ void movesCol(Table* table, char command[256]){
     cardValueTo = convertValue(colTo->prev->card.value);
     cardValueFrom = convertValue(colFrom->prev->card.value);
     current = colFrom->prev;
-
-
+    bool moveMade = false;
 
     if(command[4] == 'F'){
-        if(cardSuitFrom == cardSuitTo && cardValueTo + 48 == cardValueFrom - 1  || colTo->isDummy){
+        if((cardSuitFrom == cardSuitTo && cardValueTo + 48 == cardValueFrom - 1) || colTo->next->isDummy){
             current->prev->next = colFrom;
             colFrom->prev = current->prev;
 
@@ -309,10 +309,11 @@ void movesCol(Table* table, char command[256]){
             current->prev = colTo;
             current->next = topCard;
             topCard->prev = current;
+            moveMade = true;
         }
     }
 
-    if(cardSuitFrom != cardSuitTo && cardValueTo > cardValueFrom || cardValueTo + 48 == 0 && cardValueFrom == 13){
+    if(cardSuitFrom != cardSuitTo && cardValueTo > cardValueFrom || (cardValueTo + 48 == 0 && cardValueFrom == 13)){
         current->prev->next = colFrom;
         colFrom->prev = current->prev;
 
@@ -321,11 +322,16 @@ void movesCol(Table* table, char command[256]){
         colTo->prev->next = current;
         current->next->prev = current;
         colTo->prev = current;
+        moveMade = true;
     }
+
     if(!colFrom->prev->card.isVisible){
         colFrom->prev->card.isVisible = true;
     }
+
+    return moveMade;
 }
+
 
 
 int convertValue(char value) {
