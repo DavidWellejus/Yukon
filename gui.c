@@ -105,6 +105,31 @@ char message[256]="OK";
     printTable(appData->table, "SR", message);  // Vis bordet
 }
 
+//Callback funktionen til P-knappen:
+void on_button_p_clicked(GtkWidget *widget, gpointer data) {
+    ApplicationData *appData = (ApplicationData *)data;
+    g_print("Button P clicked\n");
+    if (appData == NULL) {
+        g_print("Application data is not available\n");
+        return;
+    }
+
+    if (appData->deck == NULL || appData->table == NULL) {
+        g_print("Deck or table data is not available\n");
+        return;
+    }
+    g_print("Deck and table data are available\n");
+
+    // Sørg for, at clearTable og dealToGameTable håndterer NULL værdier og andre fejl korrekt.
+    clearTable(appData->table);
+    g_print("Table cleared\n");
+    dealToGameTable(appData->table, appData->deck);
+    g_print("Cards dealt to game table\n");
+    printTable(appData->table, "P", "Play mode activated.");
+    g_print("Table printed\n");
+}
+
+
 
 
  void activate(GtkApplication *app, gpointer user_data) {
@@ -114,6 +139,7 @@ char message[256]="OK";
     GtkWidget *buttonSW;
     GtkWidget *buttonSI;
     GtkWidget *buttonSR;
+    GtkWidget *buttonP;
 
     //Her kommer koden til den grønne baggrund:
     // Opretter en CSS provider
@@ -135,7 +161,7 @@ char message[256]="OK";
 
     // Startvinduet (Denne her skal der IKKE PILLES VED !!!!!)
     window = gtk_application_window_new(app);
-    gtk_window_set_title(GTK_WINDOW(window), "Yukon Card Game");
+    gtk_window_set_title(GTK_WINDOW(window), "Yukon Card Game-ORIGINALERNE!");
     gtk_window_set_default_size(GTK_WINDOW(window), 800, 600);
 
     // Opret et grid til at arrangere widgets
@@ -144,7 +170,7 @@ char message[256]="OK";
 
     // Her tilføjes de forskellige knapper:
 
-    //Her oprettes LD-knappen:
+    //Knappen til LD:
     //Først oprettes en knap med tilhørende tekst PÅ knappen:
     button = gtk_button_new_with_label("LD");
 
@@ -155,7 +181,7 @@ char message[256]="OK";
     gtk_grid_attach(GTK_GRID(grid), button, 0, 0, 1, 1);
 
 
-    //Her oprettes SW-knappen:
+    //Knappen til SW:
     buttonSW = gtk_button_new_with_label("SW");
     g_signal_connect(buttonSW, "clicked", G_CALLBACK(on_button_sw_clicked), appData);
     gtk_grid_attach(GTK_GRID(grid), buttonSW, 1, 0, 1, 1);
@@ -170,9 +196,13 @@ char message[256]="OK";
     g_signal_connect(buttonSR, "clicked", G_CALLBACK(on_button_sr_clicked), appData);
     gtk_grid_attach(GTK_GRID(grid), buttonSR, 3, 0, 1, 1);
 
+    //Knappen til P:
+    buttonP = gtk_button_new_with_label("P");
+    g_signal_connect(buttonP, "clicked", G_CALLBACK(on_button_p_clicked), user_data);
+    gtk_grid_attach(GTK_GRID(grid), buttonP, 4, 0, 1, 1);
 
 
 
 
-    gtk_widget_show_all(window);
+     gtk_widget_show_all(window);
 }
