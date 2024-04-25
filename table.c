@@ -300,7 +300,7 @@ bool movesCol(Table* table, char command[256]){
     bool moveMade = false;
 
     if(command[4] == 'F'){
-        if((cardSuitFrom == cardSuitTo && cardValueTo + 48 == cardValueFrom - 1) || colTo->next->isDummy){
+        if((cardSuitFrom == cardSuitTo && cardValueTo == cardValueFrom - 1) || (colTo->next->isDummy && cardValueTo + 48 == cardValueFrom - 1)){
             current->prev->next = colFrom;
             colFrom->prev = current->prev;
 
