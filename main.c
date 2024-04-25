@@ -57,7 +57,7 @@ int main() {
 
         if (sscanf(inputLine, "%s", command) == 1) {
 
-            if(t == 1 && strcmp(command, "LD") == 0 || strcmp(command, "SI") == 0 || strcmp(command, "SR") == 0 || strcmp(command, "SD") == 0 || strcmp(command, "QQ") == 0){
+            if(t == 1 && strcmp(command, "LD") == 0 || t == 1 && strcmp(command, "SI") == 0 || t == 1 && strcmp(command, "SR") == 0 || t == 1 && strcmp(command, "SD") == 0 || t == 1 && strcmp(command, "QQ") == 0){
                 strcpy(message, "Command not available in the PLAY phase.");
                 printTable(table, command, message);
             }
