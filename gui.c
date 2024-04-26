@@ -140,6 +140,11 @@ void on_button_p_clicked(GtkWidget *widget, gpointer data) {
     GtkWidget *buttonSI;
     GtkWidget *buttonSR;
     GtkWidget *buttonP;
+    GtkWidget *image1;
+    GtkWidget *image2;
+
+
+
 
     //Her kommer koden til den grønne baggrund:
     // Opretter en CSS provider
@@ -168,8 +173,24 @@ void on_button_p_clicked(GtkWidget *widget, gpointer data) {
     grid = gtk_grid_new();
     gtk_container_add(GTK_CONTAINER(window), grid);
 
-    // Her tilføjes de forskellige knapper:
 
+
+    //Her tilføjes en box og billede:
+   // box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
+    image1 = gtk_image_new_from_file("C:\\DTU\\2.Semester\\02322MaskinaerProgrammering\\lab\\project2_machine\\Yukon\\spillekort\\AS.png");
+    image2 = gtk_image_new_from_file("C:\\DTU\\2.Semester\\02322MaskinaerProgrammering\\lab\\project2_machine\\Yukon\\spillekort\\AS.png");
+
+     // Tilføjer billeder til boxen
+     //gtk_box_pack_start(GTK_BOX(box), image1, TRUE, TRUE, 0);
+
+
+     gtk_grid_attach(GTK_GRID(grid), image1, 1, 2, 1, 1);
+     gtk_grid_attach(GTK_GRID(grid), image2, 1, 3, 1, 1);
+
+
+
+
+     // Her tilføjes de forskellige knapper:
     //Knappen til LD:
     //Først oprettes en knap med tilhørende tekst PÅ knappen:
     button = gtk_button_new_with_label("LD");
@@ -184,7 +205,7 @@ void on_button_p_clicked(GtkWidget *widget, gpointer data) {
     //Knappen til SW:
     buttonSW = gtk_button_new_with_label("SW");
     g_signal_connect(buttonSW, "clicked", G_CALLBACK(on_button_sw_clicked), appData);
-    gtk_grid_attach(GTK_GRID(grid), buttonSW, 1, 0, 1, 1);
+    gtk_grid_attach(GTK_GRID(grid), buttonSW, 1, 0, 1, 10);
 
     //Knappen til SI:
     buttonSI = gtk_button_new_with_label("SI");
