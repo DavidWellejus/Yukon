@@ -18,6 +18,7 @@ void on_button_clicked(GtkWidget *widget, gpointer data);
 void on_button_sw_clicked(GtkWidget *widget, gpointer data);
 void on_button_si_clicked(GtkWidget *widget, gpointer data);
 void on_button_sr_clicked(GtkWidget *widget, gpointer data);
+void display_cards(GtkWidget *grid, Table *table);
 
 // Deklaration af aktiveringsfunktion
 void activate(GtkApplication *app, gpointer user_data);
