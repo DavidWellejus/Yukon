@@ -7,9 +7,10 @@
 
 #define GRID_WIDTH 10
 #define GRID_HEIGHT 8
-#define NUM_IMAGES 55
+#define NUM_IMAGES 52
 
 char message[256]="OK";
+char *str;
 
 
 
@@ -39,7 +40,34 @@ void on_button_clicked(GtkWidget *widget, gpointer data) {
 
     // Opdaterer bordvisningen
     printTable(appData->table, "LD", message);
+
+
+    //forsøg på indlæsning af billeder:
+    // Ryd eksisterende billeder i grid'et
+    gtk_container_foreach(GTK_CONTAINER(appData->grid), (GtkCallback)gtk_widget_destroy, NULL);
+
+    // Antagelse: Billeder indlæses her baseret på logik fra dit eksisterende system
+    char image_path[1024];
+
+    for (int i = 0; i < GRID_HEIGHT; i++) {
+        for (int j = 0; j < GRID_WIDTH; j++) {
+            int index = i * GRID_WIDTH + j;
+            if (index < NUM_IMAGES) {
+                Node *currentNode = appData->table->columns[i]->next;
+                snprintf(image_path, sizeof(image_path), "C:\\DTU\\2.Semester\\02322MaskinaerProgrammering\\lab\\project2_machine\\Yukon\\spillekort\\bagside.png");
+
+                GtkWidget *image = create_scaled_image(image_path, 75, 75);
+                if (image) {
+                    gtk_grid_attach(GTK_GRID(appData->grid), image, j, i, 1, 1);
+                }
+            }
+        }
+    }
+
+    // Opdater visningen af grid'et
+    gtk_widget_show_all(appData->grid);
 }
+
 
 //Callback funktionen til SW knappen:
 void on_button_sw_clicked(GtkWidget *widget, gpointer data) {
@@ -58,6 +86,36 @@ void on_button_sw_clicked(GtkWidget *widget, gpointer data) {
 
     // Opdater bordvisningen (antag at printTable er tilpasset til at håndtere 'SW' som command)
     printTable(appData->table, "SW", message);
+
+    //kode for indsættelse af billeder:
+    // Ryd eksisterende billeder i grid'et
+    gtk_container_foreach(GTK_CONTAINER(appData->grid), (GtkCallback)gtk_widget_destroy, NULL);
+
+
+
+    //Node * = (appData->table->columns[1]->next);
+    //printf(ga7ba->next);
+    //printf(appData->table->columns[1]->next);
+    //printf(appData->table->columns[1]->next->next);
+    // Antagelse: Billeder indlæses her baseret på logik fra dit eksisterende system
+    char image_path[1024];
+    for (int i = 0; i < GRID_HEIGHT; i++) {
+        for (int j = 0; j < GRID_WIDTH; j++) {
+            int index = i * GRID_WIDTH + j;
+            if (index < NUM_IMAGES) {
+                Node *currentNode = appData->table->columns[i]->next;
+                snprintf(image_path, sizeof(image_path), "C:\\DTU\\2.Semester\\02322MaskinaerProgrammering\\lab\\project2_machine\\Yukon\\spillekort\\%c%c.png", currentNode->card.value, currentNode->card.suit);
+
+                GtkWidget *image = create_scaled_image(image_path, 75, 75);
+                if (image) {
+                    gtk_grid_attach(GTK_GRID(appData->grid), image, j, i, 1, 1);
+                }
+            }
+        }
+    }
+
+    // Opdater visningen af grid'et
+    gtk_widget_show_all(appData->grid);
 }
 
 //Callbackfunktion til SI-knappen:
@@ -151,7 +209,7 @@ GtkWidget* create_scaled_image(const char* file_path, int width, int height) {
 
 void activate(GtkApplication *app, gpointer user_data) {
     GtkWidget *window;
-    GtkWidget *grid;
+    //GtkWidget *grid;
     GtkWidget *button;
     GtkWidget *buttonSW;
     GtkWidget *buttonSI;
@@ -197,8 +255,8 @@ void activate(GtkApplication *app, gpointer user_data) {
 
 
     // Opret et grid til at arrangere widgets
-    grid = gtk_grid_new();
-    gtk_box_pack_start(GTK_BOX(main_box), grid, TRUE, TRUE, 0);
+    appData->grid = gtk_grid_new();
+    gtk_box_pack_start(GTK_BOX(main_box), appData->grid, TRUE, TRUE, 0);
 
 
 // Her tilføjes de forskellige knapper:
@@ -232,18 +290,18 @@ void activate(GtkApplication *app, gpointer user_data) {
 
 
 
-    gtk_grid_set_column_spacing(GTK_GRID(grid), 10);
+    gtk_grid_set_column_spacing(GTK_GRID(appData->grid), 10);
 
-    for (int i = 0; i < GRID_HEIGHT; i++) {
+    /*for (int i = 0; i < GRID_HEIGHT; i++) {
         for (int j = 0; j < GRID_WIDTH; j++) {
             int index = i * GRID_WIDTH + j;
             if (index < NUM_IMAGES) {
                 snprintf(image_path, sizeof(image_path), "C:\\DTU\\2.Semester\\02322MaskinaerProgrammering\\lab\\project2_machine\\Yukon\\spillekort\\AS.png", index + 1);
                 GtkWidget *image = create_scaled_image(image_path, 75, 75);  // Antager at hver celle skal have billeder af størrelse 75x75 pixels
-                gtk_grid_attach(GTK_GRID(grid), image, j, i, 1, 1);
+                gtk_grid_attach(GTK_GRID(appData->grid), image, j, i, 1, 1);
             }
         }
-    }
+    }*/
 
 
 

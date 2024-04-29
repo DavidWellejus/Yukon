@@ -11,6 +11,7 @@
 typedef struct {
     Deck *deck;
     Table *table;
+    GtkWidget *grid;
 } ApplicationData;
 
 // Deklarationer af callback funktioner
