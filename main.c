@@ -5,7 +5,9 @@
 // Global variabel til at holde applikationsdata
 ApplicationData *appData;
 
+
 int main(int argc, char **argv) {
+
     srand(time(NULL));
 
     // Initialiser applikationsdata og tjek for fejl

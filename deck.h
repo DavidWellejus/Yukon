@@ -3,6 +3,9 @@
 //
 
 #include <stdbool.h>
+#include <gtk/gtk.h>
+
+
 
 #ifndef YUKONPROJEKT_DECK_H
 #define YUKONPROJEKT_DECK_H
@@ -20,6 +23,7 @@ typedef struct Node {
     struct Node* prev;
     struct Node* next;
     bool isDummy;
+    GtkWidget *image_widget;
 } Node;
 
 typedef struct Deck {
