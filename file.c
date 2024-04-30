@@ -26,7 +26,6 @@ bool saveDeckToFile(const Deck *deck, const char *filename) {
 Deck* loadDeckFromFile(const char *filename) {
     FILE *file = fopen(filename, "r");
     if (!file) {
-        fprintf(stderr, "Error: Unable to open file %s.\n", filename);
         return NULL;
     }
 

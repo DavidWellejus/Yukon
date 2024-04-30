@@ -79,6 +79,10 @@ Deck* splitter(Deck* originalDeck, int splitPoint) {
         secondHalf = secondHalf->next;
     }
 
+    Node* temp = secondHalf->prev;
+    secondHalf->prev = originalDeck->top;
+    temp->next = originalDeck->top;
+
     Deck* newDeck = malloc(sizeof(Deck));
     if (newDeck == NULL) {
         fprintf(stderr, "Unable to allocate memory for new Deck\n");
@@ -105,7 +109,7 @@ Deck* splitter(Deck* originalDeck, int splitPoint) {
 
     while ((firstHalf != originalDeck->top && secondHalf != originalDeck->top) && newDeck->size < splitPoint*2) {
 
-        if (!firstHalf->isDummy && firstHalf != originalDeck->top) {
+        if (!firstHalf->isDummy && firstHalf != originalDeck->top && newDeck->size < splitPoint*2) {
             Node* newNode = malloc(sizeof(Node));
             if (newNode == NULL) {
                 fprintf(stderr, "Failed to allocate node\n");
@@ -136,7 +140,9 @@ Deck* splitter(Deck* originalDeck, int splitPoint) {
         }
     }
 
-    Node* remaining = (firstHalf->prev == newDeck->top->next) ? firstHalf : secondHalf;
+    Node* remaining = (firstHalf != originalDeck->top) ? firstHalf : secondHalf;
+
+
     while (remaining != originalDeck->top && newDeck->size < 52) {
         if (!remaining->isDummy) {
             Node* newNode = malloc(sizeof(Node));
