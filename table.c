@@ -294,9 +294,12 @@ bool movesCol(Table* table, char command[256]){
 
     cardSuitTo = colTo->prev->card.suit;
     cardSuitFrom = colFrom->prev->card.suit;
-    cardValueTo = convertValue(colTo->prev->card.value);
-    cardValueFrom = convertValue(colFrom->prev->card.value);
-    current = colFrom->prev;
+    if(command[4] == 'F'){cardValueTo = convertValue(colTo->next->card.value); }
+    else{cardValueTo = convertValue(colTo->prev->card.value);}
+    if(command[0] == 'F'){cardValueFrom = convertValue(colFrom->next->card.value);}
+    else{cardValueFrom = convertValue(colFrom->prev->card.value);}
+    if(command[0] == 'F'){current = colFrom->next;}
+    else{current = colFrom->prev;}
     bool moveMade = false;
 
     if(command[4] == 'F'){
@@ -313,7 +316,24 @@ bool movesCol(Table* table, char command[256]){
         }
     }
 
-    if(cardSuitFrom != cardSuitTo && cardValueTo > cardValueFrom || (cardValueTo + 48 == 0 && cardValueFrom == 13)){
+    else if(command[0] == 'F'){
+        if(cardSuitFrom != cardSuitTo && cardValueTo - 1 == cardValueFrom){
+            Node* cardToMove = colFrom->next;
+
+            colFrom->next = cardToMove->next;
+            cardToMove->next->prev = colFrom;
+
+            // Tilføj kortet til mål-kolonnen
+            cardToMove->next = colTo->prev;    // Kortet der flyttes bliver det nye top kort i kolonnen
+            cardToMove->next = colTo;
+            colTo->prev->next = cardToMove;
+            colTo->prev = cardToMove;
+
+            moveMade = true;
+        }
+    }
+
+    else if(cardSuitFrom != cardSuitTo && cardValueTo - 1 == cardValueFrom || (cardValueTo + 48 == 0 && cardValueFrom == 13)){
         current->prev->next = colFrom;
         colFrom->prev = current->prev;
 
