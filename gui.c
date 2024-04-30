@@ -56,7 +56,7 @@ void on_button_clicked(GtkWidget *widget, gpointer data) {
                 Node *currentNode = appData->table->columns[i]->next;
                 snprintf(image_path, sizeof(image_path), "C:\\DTU\\2.Semester\\02322MaskinaerProgrammering\\lab\\project2_machine\\Yukon\\spillekort\\bagside.png");
 
-                GtkWidget *image = create_scaled_image(image_path, 75, 75);
+                GtkWidget *image = create_scaled_image(image_path, 70, 130);
                 if (image) {
                     gtk_grid_attach(GTK_GRID(appData->grid), image, j, i, 1, 1);
                 }
@@ -93,12 +93,9 @@ void on_button_sw_clicked(GtkWidget *widget, gpointer data) {
 
 
 
-    //Node * = (appData->table->columns[1]->next);
-    //printf(ga7ba->next);
-    //printf(appData->table->columns[1]->next);
-    //printf(appData->table->columns[1]->next->next);
+
     // Antagelse: Billeder indlæses her baseret på logik fra dit eksisterende system
-    char image_path[1024];
+    /*char image_path[1024];
     for (int i = 0; i < GRID_HEIGHT; i++) {
         for (int j = 0; j < GRID_WIDTH; j++) {
             int index = i * GRID_WIDTH + j;
@@ -106,13 +103,15 @@ void on_button_sw_clicked(GtkWidget *widget, gpointer data) {
                 Node *currentNode = appData->table->columns[i]->next;
                 snprintf(image_path, sizeof(image_path), "C:\\DTU\\2.Semester\\02322MaskinaerProgrammering\\lab\\project2_machine\\Yukon\\spillekort\\%c%c.png", currentNode->card.value, currentNode->card.suit);
 
-                GtkWidget *image = create_scaled_image(image_path, 75, 75);
+                GtkWidget *image = create_scaled_image(image_path, 70, 130);
                 if (image) {
                     gtk_grid_attach(GTK_GRID(appData->grid), image, j, i, 1, 1);
                 }
             }
         }
-    }
+    }*/
+
+    displayTableImages(appData->table, appData->grid);
 
     // Opdater visningen af grid'et
     gtk_widget_show_all(appData->grid);
@@ -202,6 +201,36 @@ GtkWidget* create_scaled_image(const char* file_path, int width, int height) {
     g_object_unref(scaled_pixbuf);    // Frigør det skalerede pixbuf
 
     return image;
+}
+
+
+void displayTableImages(Table *table, GtkGrid *grid) {
+    if (table == NULL) return;
+
+    char image_path1[256];
+    GtkWidget *image;
+
+    for (int col = 0; col < 7; col++) {
+        Node *currentNode = table->columns[col]->next;
+        int row = 0;
+        while (currentNode != table->columns[col]) {
+            if (!currentNode->isDummy) {
+                // Skab billedstien
+                snprintf(image_path1, sizeof(image_path1), "C:\\DTU\\2.Semester\\02322MaskinaerProgrammering\\lab\\project2_machine\\Yukon\\spillekort\\%c%c.png", currentNode->card.value, currentNode->card.suit);
+
+                // Skab billedet fra stien
+                image = create_scaled_image(image_path1, 70, 130);
+                if (image) {
+                    // Tilføj billedet til grid
+                    gtk_grid_attach(GTK_GRID(grid), image, col, row, 1, 1);
+                    gtk_widget_show(image); // Sørg for at billedet vises
+                }
+            }
+            currentNode = currentNode->next;
+            row++;
+        }
+    }
+    gtk_widget_show_all(GTK_WIDGET(grid));
 }
 
 

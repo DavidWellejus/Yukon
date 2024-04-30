@@ -21,6 +21,7 @@ void on_button_si_clicked(GtkWidget *widget, gpointer data);
 void on_button_sr_clicked(GtkWidget *widget, gpointer data);
 void display_cards(GtkWidget *grid, Table *table);
 GtkWidget* create_scaled_image(const char* file_path, int width, int height);
+void displayTableImages(Table *table, GtkGrid *grid);
 
 // Deklaration af aktiveringsfunktion
 void activate(GtkApplication *app, gpointer user_data);
