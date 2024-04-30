@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Yukon"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Yukon">
+				<Option output="C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/cmake-build-debug/Yukon.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/Program Files/JetBrains/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/include"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../include"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/cmake-build-debug/Makefile&quot;  VERBOSE=1 Yukon"/>
+					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Yukon/fast">
+				<Option output="C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/cmake-build-debug/Yukon.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/Program Files/JetBrains/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/include"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../include"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2023.3.4/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/cmake-build-debug/Makefile&quot;  VERBOSE=1 Yukon/fast"/>
+					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/bin/mingw32-make.exe -f &quot;C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/deck.c">
+			<Option target="Yukon"/>
+		</Unit>
+		<Unit filename="C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/deck.h">
+			<Option target="Yukon"/>
+		</Unit>
+		<Unit filename="C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/file.c">
+			<Option target="Yukon"/>
+		</Unit>
+		<Unit filename="C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/file.h">
+			<Option target="Yukon"/>
+		</Unit>
+		<Unit filename="C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/main.c">
+			<Option target="Yukon"/>
+		</Unit>
+		<Unit filename="C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/main.h">
+			<Option target="Yukon"/>
+		</Unit>
+		<Unit filename="C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/shuffle.c">
+			<Option target="Yukon"/>
+		</Unit>
+		<Unit filename="C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/shuffle.h">
+			<Option target="Yukon"/>
+		</Unit>
+		<Unit filename="C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/table.c">
+			<Option target="Yukon"/>
+		</Unit>
+		<Unit filename="C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/table.h">
+			<Option target="Yukon"/>
+		</Unit>
+		<Unit filename="C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

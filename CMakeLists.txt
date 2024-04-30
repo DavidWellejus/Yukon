@@ -12,4 +12,5 @@ add_executable(Yukon main.c
         shuffle.h
         table.c
         table.h
+        main.h
 )
