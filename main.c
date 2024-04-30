@@ -13,7 +13,7 @@ void initializeDeck(Deck *deck);
 bool saveDeckToFile(const Deck *deck, const char *filename);
 Deck* shuffleDeck(Deck* deck);
 Deck* loadDeckFromFile(const char *filename);
-void dealToStartTable(Deck *deck, Table *table);
+bool dealToStartTable(Deck *deck, Table *table);
 void printTable(Table *table, char lastCommand[256], char message[256]);
 void setShowAllCards(Table *table, bool isVisible);
 Deck* splitter(Deck* deck, int split);
@@ -71,7 +71,7 @@ int main() {
                         } else {
                             deck = loadDeckFromFile(fileName);
                             clearTable(table);
-                            dealToStartTable(deck, table);
+                            if(!dealToStartTable(deck, table)){strcpy(message, "Error: Not all cards were distributed correctly");}
                             printTable(table, command, message);
                         }
                     }

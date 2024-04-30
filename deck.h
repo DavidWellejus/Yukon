@@ -36,7 +36,7 @@ typedef struct Table {
 void initializeDeck(Deck *deck);
 Deck* shuffleDeck(Deck* deck);
 Table* initializeTable();
-void dealToStartTable(Deck *deck, Table *table);
+bool dealToStartTable(Deck *deck, Table *table);
 void printTable(Table *table, char command[256], char message[256]);
 bool isValidCard(const char *cardStr);
 bool addCard(Deck *deck, const char value, const char suit);

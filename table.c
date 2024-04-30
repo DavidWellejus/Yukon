@@ -30,7 +30,8 @@ Table* initializeTable() {
     return table;
 }
 
-void dealToStartTable(Deck *deck, Table *table) {
+bool dealToStartTable(Deck *deck, Table *table) {
+    bool dealt = true;
     int cardCount = 0;
     Node *cardToDeal = deck->top->next;
 
@@ -60,8 +61,9 @@ void dealToStartTable(Deck *deck, Table *table) {
     }
 
     if (cardCount < 52) {
-        fprintf(stderr, "Error: Not all cards have been distributed from the deck.\n");
+        dealt = false;
     }
+    return dealt;
 }
 
 
