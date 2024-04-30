@@ -23,4 +23,7 @@ bool moves(Table* table, char command[256]);
 bool movesCol(Table* table, char command[256]);
 void stripNewline(char *str);
 
+
+
+
 #endif //YUKON_MAIN_H

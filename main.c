@@ -24,6 +24,9 @@ int main() {
     char command[256];
     char fileName[256];
 
+
+
+
     int t = 0;
     while (true) {
         if (strcmp(command, "P") == 0) t = 1;
@@ -173,10 +176,10 @@ int main() {
         }
 
     }
-        free(deck);
-        free(table);
+    free(deck);
+    free(table);
 
-        return 0;
+    return 0;
 }
 
 void stripNewline(char *str) {

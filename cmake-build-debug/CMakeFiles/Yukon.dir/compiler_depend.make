@@ -93,6 +93,7 @@ CMakeFiles/Yukon.dir/main.c.obj: C:/DTU/2.Semester/02322MaskinaerProgrammering/l
   C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include/vadefs.h \
   C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/deck.h \
   C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/file.h \
+  C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/main.h \
   C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/shuffle.h \
   C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/table.h
 
@@ -177,6 +178,8 @@ C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include
 C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include/corecrt_wstdlib.h:
 
 C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include/_mingw_off_t.h:
+
+C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/Yukon/main.h:
 
 C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h:
 
