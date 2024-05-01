@@ -11,3 +11,5 @@
 #endif //YUKON_FILE_H
 bool saveDeckToFile(const Deck *deck, const char *filename);
 Deck* loadDeckFromFile(const char *filename);
+int getSuitIndex(char suit);
+int getRankIndex(char rank);
