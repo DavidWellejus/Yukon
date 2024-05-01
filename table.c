@@ -318,16 +318,17 @@ bool movesCol(Table* table, char command[256]){
         }
     }
 
-    else if(command[0] == 'F'){
+    if(command[0] == 'F'){
         if(cardSuitFrom != cardSuitTo && cardValueTo - 1 == cardValueFrom){
             Node* cardToMove = colFrom->next;
 
             colFrom->next = cardToMove->next;
-            cardToMove->next->prev = colFrom;
+            if (cardToMove->next != colFrom) {
+                cardToMove->next->prev = colFrom;
+            }
 
-            // Tilføj kortet til mål-kolonnen
-            cardToMove->next = colTo->prev;    // Kortet der flyttes bliver det nye top kort i kolonnen
-            cardToMove->next = colTo;
+            cardToMove->next = colTo->prev->next;
+            cardToMove->prev = colTo->prev;
             colTo->prev->next = cardToMove;
             colTo->prev = cardToMove;
 

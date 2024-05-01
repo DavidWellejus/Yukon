@@ -76,7 +76,7 @@ int main() {
                         }
                     }
                     else {
-                        deck = loadDeckFromFile("C:/DTU/2.Semester/02322MaskinaerProgrammering/lab/project2_machine/default.txt");
+                        deck = loadDeckFromFile("../default.txt");
                         clearTable(table);
                         dealToStartTable(deck, table);
                         printTable(table, command, message);
