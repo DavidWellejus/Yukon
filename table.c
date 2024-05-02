@@ -254,7 +254,7 @@ bool moves(Table* table, char command[256]){
             moveMade = true;
         }
 
-        if(cardSuitFrom != cardSuitTo && cardValueToInt > currentValueInt || (cardValueToInt + 48 == 0 && currentValueInt == 13)){
+        if(current->card.isVisible && cardSuitFrom != cardSuitTo && cardValueToInt > currentValueInt || (cardValueToInt + 48 == 0 && currentValueInt == 13)){
             current->prev->next = colFrom;
             colFrom->prev = current->prev;
 
